@@ -289,7 +289,10 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart_IT(DMA_HandleTypeDef *hdma, uint32_
     {
       /* Enable Common interrupts*/
       MODIFY_REG(((DMA_Stream_TypeDef   *)hdma->Instance)->CR, (DMA_IT_TC | DMA_IT_TE | DMA_IT_DME | DMA_IT_HT), (DMA_IT_TC | DMA_IT_TE | DMA_IT_DME));
-      ((DMA_Stream_TypeDef   *)hdma->Instance)->FCR |= DMA_IT_FE;
+      if(((DMA_Stream_TypeDef *)hdma->Instance)->FCR & DMA_SxFCR_DMDIS)
+      {
+        ((DMA_Stream_TypeDef *)hdma->Instance)->FCR |= DMA_IT_FE;
+      }
 
       if((hdma->XferHalfCpltCallback != NULL) || (hdma->XferM1HalfCpltCallback != NULL))
       {
@@ -709,4 +712,3 @@ static void DMA_MultiBufferSetConfig(DMA_HandleTypeDef *hdma, uint32_t SrcAddres
 /**
   * @}
   */
-
