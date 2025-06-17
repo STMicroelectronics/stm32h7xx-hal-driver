@@ -3759,12 +3759,24 @@ static void UART_DMAReceiveCplt(DMA_HandleTypeDef *hdma)
      If Reception till IDLE event has been selected : use Rx Event callback */
   if (huart->ReceptionType == HAL_UART_RECEPTION_TOIDLE)
   {
+    huart->RxXferCount = 0;
+
+    /* Check current nb of data still to be received on DMA side.
+       DMA Normal mode, remaining nb of data will be 0
+       DMA Circular mode, remaining nb of data is reset to RxXferSize */
+    uint16_t nb_remaining_rx_data = (uint16_t) __HAL_DMA_GET_COUNTER(hdma);
+    if (nb_remaining_rx_data < huart->RxXferSize)
+    {
+      /* Update nb of remaining data */
+      huart->RxXferCount = nb_remaining_rx_data;
+    }
+
 #if (USE_HAL_UART_REGISTER_CALLBACKS == 1)
     /*Call registered Rx Event callback*/
-    huart->RxEventCallback(huart, huart->RxXferSize);
+    huart->RxEventCallback(huart, (huart->RxXferSize - huart->RxXferCount));
 #else
     /*Call legacy weak Rx Event callback*/
-    HAL_UARTEx_RxEventCallback(huart, huart->RxXferSize);
+    HAL_UARTEx_RxEventCallback(huart, (huart->RxXferSize - huart->RxXferCount));
 #endif /* USE_HAL_UART_REGISTER_CALLBACKS */
   }
   else
@@ -3797,12 +3809,22 @@ static void UART_DMARxHalfCplt(DMA_HandleTypeDef *hdma)
      If Reception till IDLE event has been selected : use Rx Event callback */
   if (huart->ReceptionType == HAL_UART_RECEPTION_TOIDLE)
   {
+    huart->RxXferCount = huart->RxXferSize / 2U;
+
+    /* Check current nb of data still to be received on DMA side. */
+    uint16_t nb_remaining_rx_data = (uint16_t) __HAL_DMA_GET_COUNTER(hdma);
+    if (nb_remaining_rx_data <= huart->RxXferSize)
+    {
+      /* Update nb of remaining data */
+      huart->RxXferCount = nb_remaining_rx_data;
+    }
+
 #if (USE_HAL_UART_REGISTER_CALLBACKS == 1)
     /*Call registered Rx Event callback*/
-    huart->RxEventCallback(huart, huart->RxXferSize / 2U);
+    huart->RxEventCallback(huart, (huart->RxXferSize - huart->RxXferCount));
 #else
     /*Call legacy weak Rx Event callback*/
-    HAL_UARTEx_RxEventCallback(huart, huart->RxXferSize / 2U);
+    HAL_UARTEx_RxEventCallback(huart, (huart->RxXferSize - huart->RxXferCount));
 #endif /* USE_HAL_UART_REGISTER_CALLBACKS */
   }
   else
