@@ -639,6 +639,7 @@ HAL_StatusTypeDef HAL_NAND_Read_Page_8b(NAND_HandleTypeDef *hnand, const NAND_Ad
       {
         *buff = *(uint8_t *)deviceaddress;
         buff++;
+        __DSB();
       }
 
       /* Increment read pages number */
@@ -807,6 +808,7 @@ HAL_StatusTypeDef HAL_NAND_Read_Page_16b(NAND_HandleTypeDef *hnand, const NAND_A
       {
         *buff = *(uint16_t *)deviceaddress;
         buff++;
+        __DSB();
       }
 
       /* Increment read pages number */
@@ -1289,6 +1291,7 @@ HAL_StatusTypeDef HAL_NAND_Read_SpareArea_8b(NAND_HandleTypeDef *hnand, const NA
       {
         *buff = *(uint8_t *)deviceaddress;
         buff++;
+        __DSB();
       }
 
       /* Increment read spare areas number */
@@ -1454,6 +1457,7 @@ HAL_StatusTypeDef HAL_NAND_Read_SpareArea_16b(NAND_HandleTypeDef *hnand, const N
       {
         *buff = *(uint16_t *)deviceaddress;
         buff++;
+        __DSB();
       }
 
       /* Increment read spare areas number */
