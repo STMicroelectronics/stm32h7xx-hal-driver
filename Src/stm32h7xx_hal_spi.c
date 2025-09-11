@@ -1133,6 +1133,15 @@ HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint1
         hspi->pRxBuffPtr += sizeof(uint32_t);
         hspi->RxXferCount--;
       }
+      /* Check if transfer is locked because of a suspend */
+      else if (HAL_IS_BIT_SET(temp_sr_reg, SPI_SR_SUSP))
+      {
+        /* Verify suspend is triggered by hardware and not software */
+        if (HAL_IS_BIT_SET(hspi->Instance->CR1, SPI_CR1_CSTART))
+        {
+          __HAL_SPI_CLEAR_SUSPFLAG(hspi);
+        }
+      }
       else
       {
         /* Timeout management */
@@ -1200,6 +1209,15 @@ HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint1
         hspi->pRxBuffPtr += sizeof(uint16_t);
         hspi->RxXferCount--;
       }
+      /* Check if transfer is locked because of a suspend */
+      else if (HAL_IS_BIT_SET(temp_sr_reg, SPI_SR_SUSP))
+      {
+        /* Verify suspend is triggered by hardware and not software */
+        if (HAL_IS_BIT_SET(hspi->Instance->CR1, SPI_CR1_CSTART))
+        {
+          __HAL_SPI_CLEAR_SUSPFLAG(hspi);
+        }
+      }
       else
       {
         /* Timeout management */
@@ -1254,6 +1272,15 @@ HAL_StatusTypeDef HAL_SPI_Receive(SPI_HandleTypeDef *hspi, uint8_t *pData, uint1
         *((uint8_t *)hspi->pRxBuffPtr) = *((__IO uint8_t *)&hspi->Instance->RXDR);
         hspi->pRxBuffPtr += sizeof(uint8_t);
         hspi->RxXferCount--;
+      }
+      /* Check if transfer is locked because of a suspend */
+      else if (HAL_IS_BIT_SET(temp_sr_reg, SPI_SR_SUSP))
+      {
+        /* Verify suspend is triggered by hardware and not software */
+        if (HAL_IS_BIT_SET(hspi->Instance->CR1, SPI_CR1_CSTART))
+        {
+          __HAL_SPI_CLEAR_SUSPFLAG(hspi);
+        }
       }
       else
       {
