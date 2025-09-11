@@ -3760,13 +3760,15 @@ static void SPI_RxISR_32BIT(SPI_HandleTypeDef *hspi)
 static void SPI_TxISR_8BIT(SPI_HandleTypeDef *hspi)
 {
   /* Transmit data in 8 Bit mode */
-  *(__IO uint8_t *)&hspi->Instance->TXDR = *((const uint8_t *)hspi->pTxBuffPtr);
-  hspi->pTxBuffPtr += sizeof(uint8_t);
-  hspi->TxXferCount--;
-
-  /* Disable IT if no more data excepted */
-  if (hspi->TxXferCount == 0UL)
+  if (hspi->TxXferCount != 0UL)
   {
+    *(__IO uint8_t *)&hspi->Instance->TXDR = *((const uint8_t *)hspi->pTxBuffPtr);
+    hspi->pTxBuffPtr += sizeof(uint8_t);
+    hspi->TxXferCount--;
+  }
+  else
+  {
+    /* Disable IT if no more data expected */
 #if defined(USE_SPI_RELOAD_TRANSFER)
     /* Check if there is any request to reload */
     if (hspi->Reload.Requested == 1UL)
@@ -3802,19 +3804,21 @@ static void SPI_TxISR_8BIT(SPI_HandleTypeDef *hspi)
 static void SPI_TxISR_16BIT(SPI_HandleTypeDef *hspi)
 {
   /* Transmit data in 16 Bit mode */
-#if defined (__GNUC__)
-  __IO uint16_t *ptxdr_16bits = (__IO uint16_t *)(&(hspi->Instance->TXDR));
-
-  *ptxdr_16bits = *((const uint16_t *)hspi->pTxBuffPtr);
-#else
-  *((__IO uint16_t *)&hspi->Instance->TXDR) = *((const uint16_t *)hspi->pTxBuffPtr);
-#endif /* __GNUC__ */
-  hspi->pTxBuffPtr += sizeof(uint16_t);
-  hspi->TxXferCount--;
-
-  /* Disable IT if no more data excepted */
-  if (hspi->TxXferCount == 0UL)
+  if (hspi->TxXferCount != 0UL)
   {
+#if defined (__GNUC__)
+    __IO uint16_t *ptxdr_16bits = (__IO uint16_t *)(&(hspi->Instance->TXDR));
+
+    *ptxdr_16bits = *((const uint16_t *)hspi->pTxBuffPtr);
+#else
+    *((__IO uint16 _t *)&hspi->Instance->TXDR) = *((const uint16_t *)hspi->pTxBuffPtr);
+#endif /* __GNUC__ */
+    hspi->pTxBuffPtr += sizeof(uint16_t);
+    hspi->TxXferCount--;
+  }
+  else
+  {
+    /* Disable IT if no more data expected */
 #if defined(USE_SPI_RELOAD_TRANSFER)
     /* Check if there is any request to reload */
     if (hspi->Reload.Requested == 1UL)
@@ -3850,13 +3854,15 @@ static void SPI_TxISR_16BIT(SPI_HandleTypeDef *hspi)
 static void SPI_TxISR_32BIT(SPI_HandleTypeDef *hspi)
 {
   /* Transmit data in 32 Bit mode */
-  *((__IO uint32_t *)&hspi->Instance->TXDR) = *((const uint32_t *)hspi->pTxBuffPtr);
-  hspi->pTxBuffPtr += sizeof(uint32_t);
-  hspi->TxXferCount--;
-
-  /* Disable IT if no more data excepted */
-  if (hspi->TxXferCount == 0UL)
+  if (hspi->TxXferCount != 0UL)
   {
+    *((__IO uint32_t *)&hspi->Instance->TXDR) = *((const uint32_t *)hspi->pTxBuffPtr);
+    hspi->pTxBuffPtr += sizeof(uint32_t);
+    hspi->TxXferCount--;
+  }
+  else
+  {
+    /* Disable IT if no more data expected */
 #if defined(USE_SPI_RELOAD_TRANSFER)
     /* Check if there is any request to reload */
     if (hspi->Reload.Requested == 1UL)
