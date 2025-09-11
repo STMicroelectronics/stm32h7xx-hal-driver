@@ -2781,6 +2781,15 @@ HAL_StatusTypeDef HAL_SPI_Abort_IT(SPI_HandleTypeDef *hspi)
   /* If DMA Tx and/or DMA Rx Handles are associated to SPI Handle, DMA Abort complete callbacks should be initialized
      before any call to DMA Abort functions */
 
+  if (hspi->hdmarx != NULL)
+  {
+    if (HAL_IS_BIT_SET(hspi->Instance->CFG1, SPI_CFG1_RXDMAEN))
+    {
+      /* Set DMA Abort Complete callback if SPI DMA Rx request if enabled */
+      hspi->hdmarx->XferAbortCallback = SPI_DMARxAbortCallback;
+    }
+  }
+
   if (hspi->hdmatx != NULL)
   {
     if (HAL_IS_BIT_SET(hspi->Instance->CFG1, SPI_CFG1_TXDMAEN))
