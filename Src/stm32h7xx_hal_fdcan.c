@@ -2973,18 +2973,19 @@ HAL_StatusTypeDef HAL_FDCAN_GetRxMessage(FDCAN_HandleTypeDef *hfdcan, uint32_t R
       }
       else
       {
+        /* Calculate Rx FIFO 0 element index */
+        GetIndex = ((hfdcan->Instance->RXF0S & FDCAN_RXF0S_F0GI) >> FDCAN_RXF0S_F0GI_Pos);
+
         /* Check that the Rx FIFO 0 is full & overwrite mode is on */
         if (((hfdcan->Instance->RXF0S & FDCAN_RXF0S_F0F) >> FDCAN_RXF0S_F0F_Pos) == 1U)
         {
           if (((hfdcan->Instance->RXF0C & FDCAN_RXF0C_F0OM) >> FDCAN_RXF0C_F0OM_Pos) == FDCAN_RX_FIFO_OVERWRITE)
           {
             /* When overwrite status is on discard first message in FIFO */
-            GetIndex = 1U;
+            /* GetIndex is incremented by one and wraps to 0 in case it overflows the FIFO size */
+            GetIndex = (GetIndex + 1U) & ((hfdcan->Instance->RXF0C & FDCAN_RXF0C_F0S) >> FDCAN_RXF0C_F0S_Pos);
           }
         }
-
-        /* Calculate Rx FIFO 0 element index */
-        GetIndex += ((hfdcan->Instance->RXF0S & FDCAN_RXF0S_F0GI) >> FDCAN_RXF0S_F0GI_Pos);
 
         /* Calculate Rx FIFO 0 element address */
         RxAddress = (uint32_t *)(hfdcan->msgRam.RxFIFO0SA + (GetIndex * hfdcan->Init.RxFifo0ElmtSize * 4U));
@@ -3011,18 +3012,19 @@ HAL_StatusTypeDef HAL_FDCAN_GetRxMessage(FDCAN_HandleTypeDef *hfdcan, uint32_t R
       }
       else
       {
+        /* Calculate Rx FIFO 1 element index */
+        GetIndex = ((hfdcan->Instance->RXF1S & FDCAN_RXF1S_F1GI) >> FDCAN_RXF1S_F1GI_Pos);
+
         /* Check that the Rx FIFO 1 is full & overwrite mode is on */
         if (((hfdcan->Instance->RXF1S & FDCAN_RXF1S_F1F) >> FDCAN_RXF1S_F1F_Pos) == 1U)
         {
           if (((hfdcan->Instance->RXF1C & FDCAN_RXF1C_F1OM) >> FDCAN_RXF1C_F1OM_Pos) == FDCAN_RX_FIFO_OVERWRITE)
           {
             /* When overwrite status is on discard first message in FIFO */
-            GetIndex = 1U;
+            /* GetIndex is incremented by one and wraps to 0 in case it overflows the FIFO size */
+            GetIndex = (GetIndex + 1U) & ((hfdcan->Instance->RXF1C & FDCAN_RXF1C_F1S) >> FDCAN_RXF1C_F1S_Pos);
           }
         }
-
-        /* Calculate Rx FIFO 1 element index */
-        GetIndex += ((hfdcan->Instance->RXF1S & FDCAN_RXF1S_F1GI) >> FDCAN_RXF1S_F1GI_Pos);
 
         /* Calculate Rx FIFO 1 element address */
         RxAddress = (uint32_t *)(hfdcan->msgRam.RxFIFO1SA + (GetIndex * hfdcan->Init.RxFifo1ElmtSize * 4U));
