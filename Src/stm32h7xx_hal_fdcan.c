@@ -235,6 +235,8 @@
 
 #define SRAMCAN_FLS_NBR          (128U)                  /* Max. Filter List Standard Number */
 #define SRAMCAN_FLE_NBR          (64U)                   /* Max. Filter List Extended Number */
+#define SRAMCAN_FLS_SIZE         (1U * 4U)               /* Filter Standard Element Size in bytes */
+#define SRAMCAN_FLE_SIZE         (2U * 4U)               /* Filter Extended Element Size in bytes */
 #define SRAMCAN_RF0_NBR          (64U)                   /* RX FIFO 0 Elements Number        */
 #define SRAMCAN_RF1_NBR          (64U)                   /* RX FIFO 1 Elements Number        */
 #define SRAMCAN_RB_NBR           (64U)                   /* RX Buffers Number                */
@@ -1883,7 +1885,7 @@ HAL_StatusTypeDef HAL_FDCAN_ConfigFilter(FDCAN_HandleTypeDef *hfdcan, const FDCA
       }
 
       /* Calculate filter address */
-      FilterAddress = (uint32_t *)(hfdcan->msgRam.StandardFilterSA + (sFilterConfig->FilterIndex * 4U));
+      FilterAddress = (uint32_t *)(hfdcan->msgRam.StandardFilterSA + (sFilterConfig->FilterIndex * SRAMCAN_FLS_SIZE));
 
       /* Write filter element to the message RAM */
       *FilterAddress = FilterElementW1;
@@ -1891,7 +1893,7 @@ HAL_StatusTypeDef HAL_FDCAN_ConfigFilter(FDCAN_HandleTypeDef *hfdcan, const FDCA
     else /* sFilterConfig->IdType == FDCAN_EXTENDED_ID */
     {
       /* Check function parameters */
-      assert_param(IS_FDCAN_MAX_VALUE(sFilterConfig->FilterIndex, (hfdcan->Init.ExtFiltersNbr - 1U)));
+      assert_param(IS_FDCAN_MAX_VALUE((sFilterConfig->FilterIndex + 1U), hfdcan->Init.ExtFiltersNbr));
       assert_param(IS_FDCAN_MAX_VALUE(sFilterConfig->FilterID1, 0x1FFFFFFFU));
       if (sFilterConfig->FilterConfig != FDCAN_FILTER_TO_RXBUFFER)
       {
@@ -1913,7 +1915,7 @@ HAL_StatusTypeDef HAL_FDCAN_ConfigFilter(FDCAN_HandleTypeDef *hfdcan, const FDCA
       }
 
       /* Calculate filter address */
-      FilterAddress = (uint32_t *)(hfdcan->msgRam.ExtendedFilterSA + (sFilterConfig->FilterIndex * 4U * 2U));
+      FilterAddress = (uint32_t *)(hfdcan->msgRam.ExtendedFilterSA + (sFilterConfig->FilterIndex * SRAMCAN_FLE_SIZE));
 
       /* Write filter element to the message RAM */
       *FilterAddress = FilterElementW1;
