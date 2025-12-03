@@ -1444,19 +1444,19 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
         /* Current memory buffer used is Memory 0 */
         if((ccr_reg & BDMA_CCR_CT) == 0U)
         {
-          if(hdma->XferM1HalfCpltCallback != NULL)
+          if(hdma->XferHalfCpltCallback != NULL)
           {
-            /* Half transfer Callback for Memory 1 */
-            hdma->XferM1HalfCpltCallback(hdma);
+            /* Half transfer Callback for Memory 0 */
+            hdma->XferHalfCpltCallback(hdma);
           }
         }
         /* Current memory buffer used is Memory 1 */
         else
         {
-          if(hdma->XferHalfCpltCallback != NULL)
+          if(hdma->XferM1HalfCpltCallback != NULL)
           {
-            /* Half transfer Callback for Memory 0 */
-            hdma->XferHalfCpltCallback(hdma);
+            /* Half transfer Callback for Memory 1 */
+            hdma->XferM1HalfCpltCallback(hdma);
           }
         }
       }
