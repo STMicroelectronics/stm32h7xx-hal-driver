@@ -744,7 +744,7 @@ void HAL_MDIOS_IRQHandler(MDIOS_HandleTypeDef *hmdios)
 #endif  /* USE_HAL_MDIOS_REGISTER_CALLBACKS */
 
       /* Clear write register flag */
-      hmdios->Instance->CWRFR |= MDIOS_ALL_REG_FLAG;
+      hmdios->Instance->CWRFR = MDIOS_ALL_REG_FLAG;
     }
   }
 
@@ -763,7 +763,7 @@ void HAL_MDIOS_IRQHandler(MDIOS_HandleTypeDef *hmdios)
 #endif  /* USE_HAL_MDIOS_REGISTER_CALLBACKS */
 
       /* Clear read register flag */
-      hmdios->Instance->CRDFR |= MDIOS_ALL_REG_FLAG;
+      hmdios->Instance->CRDFR = MDIOS_ALL_REG_FLAG;
     }
   }
 

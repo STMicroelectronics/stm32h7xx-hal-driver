@@ -296,8 +296,8 @@ typedef struct
 
 #if defined(TIM_BDTR_BKBID)
   uint32_t Break2AFMode;         /*!< Specifies the alternate function mode of the break2 input.This parameter can be a value of @ref TIM_Break2_Input_AF_Mode */
-
 #endif /* TIM_BDTR_BKBID */
+
   uint32_t AutomaticOutput;      /*!< TIM Automatic Output Enable state, This parameter can be a value of @ref TIM_AOE_Bit_Set_Reset */
 
 } TIM_BreakDeadTimeConfigTypeDef;
@@ -2145,18 +2145,12 @@ mode.
 
 #define TIM_CHANNEL_STATE_SET_ALL(__HANDLE__,  __CHANNEL_STATE__)\
   do {\
-    (__HANDLE__)->ChannelState[0]  = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelState[1]  = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelState[2]  = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelState[3]  = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelState[4]  = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelState[5]  = \
-    (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelState[0]  = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelState[1]  = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelState[2]  = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelState[3]  = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelState[4]  = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelState[5]  = (__CHANNEL_STATE__);  \
   } while(0)
 
 #define TIM_CHANNEL_N_STATE_GET(__HANDLE__, __CHANNEL__)\
@@ -2173,14 +2167,10 @@ mode.
 
 #define TIM_CHANNEL_N_STATE_SET_ALL(__HANDLE__,  __CHANNEL_STATE__)\
   do {\
-    (__HANDLE__)->ChannelNState[0] = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelNState[1] = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelNState[2] = \
-    (__CHANNEL_STATE__);  \
-    (__HANDLE__)->ChannelNState[3] = \
-    (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelNState[0] = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelNState[1] = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelNState[2] = (__CHANNEL_STATE__);  \
+    (__HANDLE__)->ChannelNState[3] = (__CHANNEL_STATE__);  \
   } while(0)
 
 /**
