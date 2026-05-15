@@ -1341,8 +1341,8 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
 
         if(((((DMA_Stream_TypeDef   *)hdma->Instance)->CR) & (uint32_t)(DMA_SxCR_DBM)) != 0U)
         {
-          /* Current memory buffer used is Memory 1 */
-          if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CT) != 0U)
+          /* Current memory buffer used is Memory 0 */
+          if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CT) == 0U)
           {
             if(hdma->XferM1CpltCallback != NULL)
             {
@@ -1350,7 +1350,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
               hdma->XferM1CpltCallback(hdma);
             }
           }
-          /* Current memory buffer used is Memory 0 */
+          /* Current memory buffer used is Memory 1 */
           else
           {
             if(hdma->XferCpltCallback != NULL)
