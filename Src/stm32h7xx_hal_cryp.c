@@ -932,6 +932,15 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt(CRYP_HandleTypeDef *hcryp, uint32_t *Input, u
     hcryp->pCrypInBuffPtr = Input;
     hcryp->pCrypOutBuffPtr = Output;
 
+    /* Reject a word Size that would overflow hcryp->Size (uint16_t) once
+       converted to bytes, which would otherwise silently wrap around and
+       corrupt the transfer length */
+    if ((hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD) && (Size > (0xFFFFU / 4U)))
+    {
+      hcryp->ErrorCode |= HAL_CRYP_ERROR_NOT_SUPPORTED;
+      return HAL_ERROR;
+    }
+
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
@@ -1062,6 +1071,15 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt(CRYP_HandleTypeDef *hcryp, uint32_t *Input, u
     hcryp->pCrypInBuffPtr = Input;
     hcryp->pCrypOutBuffPtr = Output;
 
+    /* Reject a word Size that would overflow hcryp->Size (uint16_t) once
+       converted to bytes, which would otherwise silently wrap around and
+       corrupt the transfer length */
+    if ((hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD) && (Size > (0xFFFFU / 4U)))
+    {
+      hcryp->ErrorCode |= HAL_CRYP_ERROR_NOT_SUPPORTED;
+      return HAL_ERROR;
+    }
+
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
@@ -1191,6 +1209,15 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint32_t *Input
     hcryp->pCrypInBuffPtr = Input;
     hcryp->pCrypOutBuffPtr = Output;
 
+    /* Reject a word Size that would overflow hcryp->Size (uint16_t) once
+       converted to bytes, which would otherwise silently wrap around and
+       corrupt the transfer length */
+    if ((hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD) && (Size > (0xFFFFU / 4U)))
+    {
+      hcryp->ErrorCode |= HAL_CRYP_ERROR_NOT_SUPPORTED;
+      return HAL_ERROR;
+    }
+
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
@@ -1307,6 +1334,15 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint32_t *Input
     hcryp->CrypOutCount = 0U;
     hcryp->pCrypInBuffPtr = Input;
     hcryp->pCrypOutBuffPtr = Output;
+
+    /* Reject a word Size that would overflow hcryp->Size (uint16_t) once
+       converted to bytes, which would otherwise silently wrap around and
+       corrupt the transfer length */
+    if ((hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD) && (Size > (0xFFFFU / 4U)))
+    {
+      hcryp->ErrorCode |= HAL_CRYP_ERROR_NOT_SUPPORTED;
+      return HAL_ERROR;
+    }
 
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
@@ -1427,6 +1463,15 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
     hcryp->CrypOutCount = 0U;
     hcryp->pCrypInBuffPtr = Input;
     hcryp->pCrypOutBuffPtr = Output;
+
+    /* Reject a word Size that would overflow hcryp->Size (uint16_t) once
+       converted to bytes, which would otherwise silently wrap around and
+       corrupt the transfer length */
+    if ((hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD) && (Size > (0xFFFFU / 4U)))
+    {
+      hcryp->ErrorCode |= HAL_CRYP_ERROR_NOT_SUPPORTED;
+      return HAL_ERROR;
+    }
 
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
@@ -1581,6 +1626,15 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
     hcryp->CrypOutCount = 0U;
     hcryp->pCrypInBuffPtr = Input;
     hcryp->pCrypOutBuffPtr = Output;
+
+    /* Reject a word Size that would overflow hcryp->Size (uint16_t) once
+       converted to bytes, which would otherwise silently wrap around and
+       corrupt the transfer length */
+    if ((hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD) && (Size > (0xFFFFU / 4U)))
+    {
+      hcryp->ErrorCode |= HAL_CRYP_ERROR_NOT_SUPPORTED;
+      return HAL_ERROR;
+    }
 
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
