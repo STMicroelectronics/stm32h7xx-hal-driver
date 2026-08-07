@@ -935,11 +935,11 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt(CRYP_HandleTypeDef *hcryp, uint32_t *Input, u
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
-      hcryp->Size = Size * 4U;
+      hcryp->Size = ((uint32_t)Size) * 4U;
     }
     else
     {
-      hcryp->Size = Size;
+      hcryp->Size = (uint32_t)Size;
     }
 
     /* Set Encryption operating mode*/
@@ -1065,11 +1065,11 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt(CRYP_HandleTypeDef *hcryp, uint32_t *Input, u
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
-      hcryp->Size = Size * 4U;
+      hcryp->Size = ((uint32_t)Size) * 4U;
     }
     else
     {
-      hcryp->Size = Size;
+      hcryp->Size = (uint32_t)Size;
     }
 
     /* Set Decryption operating mode*/
@@ -1194,11 +1194,11 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt_IT(CRYP_HandleTypeDef *hcryp, uint32_t *Input
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
-      hcryp->Size = Size * 4U;
+      hcryp->Size = ((uint32_t)Size) * 4U;
     }
     else
     {
-      hcryp->Size = Size;
+      hcryp->Size = (uint32_t)Size;
     }
 
     /* Set encryption operating mode*/
@@ -1311,11 +1311,11 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt_IT(CRYP_HandleTypeDef *hcryp, uint32_t *Input
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
-      hcryp->Size = Size * 4U;
+      hcryp->Size = ((uint32_t)Size) * 4U;
     }
     else
     {
-      hcryp->Size = Size;
+      hcryp->Size = (uint32_t)Size;
     }
 
     /* Set decryption operating mode*/
@@ -1431,11 +1431,11 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
-      hcryp->Size = Size * 4U;
+      hcryp->Size = ((uint32_t)Size) * 4U;
     }
     else
     {
-      hcryp->Size = Size;
+      hcryp->Size = (uint32_t)Size;
     }
 
     /* Set encryption operating mode*/
@@ -1476,7 +1476,7 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
         hcryp->Phase = CRYP_PHASE_PROCESS;
 
         /* Start DMA process transfer for DES/TDES */
-        CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (hcryp->Size / 4U),
+        CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (uint16_t)(hcryp->Size / 4U),
                           (uint32_t)(hcryp->pCrypOutBuffPtr));
 
         break;
@@ -1521,7 +1521,7 @@ HAL_StatusTypeDef HAL_CRYP_Encrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
         hcryp->Phase = CRYP_PHASE_PROCESS;
 
         /* Start DMA process transfer for AES */
-        CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (hcryp->Size / 4U),
+        CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (uint16_t)(hcryp->Size / 4U),
                           (uint32_t)(hcryp->pCrypOutBuffPtr));
         break;
 
@@ -1585,11 +1585,11 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
     /*  Calculate Size parameter in Byte*/
     if (hcryp->Init.DataWidthUnit == CRYP_DATAWIDTHUNIT_WORD)
     {
-      hcryp->Size = Size * 4U;
+      hcryp->Size = ((uint32_t)Size) * 4U;
     }
     else
     {
-      hcryp->Size = Size;
+      hcryp->Size = (uint32_t)Size;
     }
 
     /* Set decryption operating mode*/
@@ -1630,7 +1630,7 @@ HAL_StatusTypeDef HAL_CRYP_Decrypt_DMA(CRYP_HandleTypeDef *hcryp, uint32_t *Inpu
         hcryp->Phase = CRYP_PHASE_PROCESS;
 
         /* Start DMA process transfer for DES/TDES */
-        CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (hcryp->Size / 4U),
+        CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (uint16_t)(hcryp->Size / 4U),
                           (uint32_t)(hcryp->pCrypOutBuffPtr));
         break;
 
@@ -2418,7 +2418,7 @@ static HAL_StatusTypeDef CRYP_AES_Decrypt_DMA(CRYP_HandleTypeDef *hcryp)
   if (hcryp->Size != 0U)
   {
     /* Set the input and output addresses and start DMA transfer */
-    CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (hcryp->Size / 4U),
+    CRYP_SetDMAConfig(hcryp, (uint32_t)(hcryp->pCrypInBuffPtr), (uint16_t)(hcryp->Size / 4U),
                       (uint32_t)(hcryp->pCrypOutBuffPtr));
   }
   else
@@ -2480,7 +2480,7 @@ static void CRYP_DMAOutCplt(DMA_HandleTypeDef *hdma)
   if (((hcryp->Size) % 16U) != 0U)
   {
     /* set CrypInCount and CrypOutCount to exact number of word already computed via DMA  */
-    hcryp->CrypInCount = (hcryp->Size / 16U) * 4U ;
+    hcryp->CrypInCount = (uint16_t)((hcryp->Size / 16U) * 4U);
     hcryp->CrypOutCount = hcryp->CrypInCount;
 
     /* Compute the number of padding bytes in last block of payload */

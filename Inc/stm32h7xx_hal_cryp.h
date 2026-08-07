@@ -108,7 +108,7 @@ typedef struct
 
   __IO uint16_t                     CrypOutCount;     /*!< Counter of output data */
 
-  uint16_t                          Size;           /*!< length of input data in word or in byte, according to DataWidthUnit */
+  uint32_t                          Size;           /*!< length of input data in word or in byte, according to DataWidthUnit */
 
   uint32_t                          Phase;            /*!< CRYP peripheral phase */
 
