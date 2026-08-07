@@ -2468,12 +2468,16 @@ HAL_StatusTypeDef HAL_SD_ConfigWideBusOperation(SD_HandleTypeDef *hsd, uint32_t 
       {
         Init.ClockDiv = hsd->Init.ClockDiv;
       }
-      else if (hsd->SdCard.CardSpeed == CARD_ULTRA_HIGH_SPEED)
+#if (USE_SD_TRANSCEIVER != 0U)
+      else if ((hsd->SdCard.CardSpeed == CARD_ULTRA_HIGH_SPEED) &&
+               (hsd->Init.TranceiverPresent == SDMMC_TRANSCEIVER_PRESENT))
       {
         /* UltraHigh speed SD card,user Clock div */
         Init.ClockDiv = hsd->Init.ClockDiv;
       }
-      else if (hsd->SdCard.CardSpeed == CARD_HIGH_SPEED)
+#endif /* USE_SD_TRANSCEIVER */
+      else if ((hsd->SdCard.CardSpeed == CARD_HIGH_SPEED) ||
+               (hsd->SdCard.CardSpeed == CARD_ULTRA_HIGH_SPEED))
       {
         /* High speed SD card, Max Frequency = 50Mhz */
         if (hsd->Init.ClockDiv == 0U)
