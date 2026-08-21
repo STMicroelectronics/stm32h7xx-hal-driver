@@ -566,12 +566,12 @@ typedef struct
 
 #if (USE_HAL_ETH_REGISTER_CALLBACKS == 1)
 
-  void (* TxCpltCallback)(struct __ETH_HandleTypeDef *heth);             /*!< ETH Tx Complete Callback */
-  void (* RxCpltCallback)(struct __ETH_HandleTypeDef *heth);            /*!< ETH Rx  Complete Callback     */
-  void (* ErrorCallback)(struct __ETH_HandleTypeDef *heth);             /*!< ETH Error Callback   */
-  void (* PMTCallback)(struct __ETH_HandleTypeDef *heth);               /*!< ETH Power Management Callback            */
-  void (* EEECallback)(struct __ETH_HandleTypeDef *heth);               /*!< ETH EEE Callback   */
-  void (* WakeUpCallback)(struct __ETH_HandleTypeDef *heth);            /*!< ETH Wake UP Callback   */
+  void (* TxCpltCallback)(struct __ETH_HandleTypeDef *heth);             /*!< ETH Tx Complete Callback      */
+  void (* RxCpltCallback)(struct __ETH_HandleTypeDef *heth);             /*!< ETH Rx  Complete Callback     */
+  void (* ErrorCallback)(struct __ETH_HandleTypeDef *heth);              /*!< ETH Error Callback            */
+  void (* PMTCallback)(struct __ETH_HandleTypeDef *heth);                /*!< ETH Power Management Callback */
+  void (* EEECallback)(struct __ETH_HandleTypeDef *heth);               /*!< ETH EEE Callback              */
+  void (* WakeUpCallback)(struct __ETH_HandleTypeDef *heth);             /*!< ETH Wake UP Callback          */
 
   void (* MspInitCallback)(struct __ETH_HandleTypeDef *heth);             /*!< ETH Msp Init callback              */
   void (* MspDeInitCallback)(struct __ETH_HandleTypeDef *heth);           /*!< ETH Msp DeInit callback            */
@@ -1747,25 +1747,26 @@ HAL_StatusTypeDef HAL_ETH_UnRegisterTxFreeCallback(ETH_HandleTypeDef *heth);
 HAL_StatusTypeDef HAL_ETH_ReleaseTxPacket(ETH_HandleTypeDef *heth);
 
 #ifdef HAL_ETH_USE_PTP
-HAL_StatusTypeDef HAL_ETH_PTP_SetConfig(ETH_HandleTypeDef *heth, ETH_PTP_ConfigTypeDef *ptpconfig);
-HAL_StatusTypeDef HAL_ETH_PTP_GetConfig(ETH_HandleTypeDef *heth, ETH_PTP_ConfigTypeDef *ptpconfig);
-HAL_StatusTypeDef HAL_ETH_PTP_SetTime(ETH_HandleTypeDef *heth, ETH_TimeTypeDef *time);
-HAL_StatusTypeDef HAL_ETH_PTP_GetTime(ETH_HandleTypeDef *heth, ETH_TimeTypeDef *time);
-HAL_StatusTypeDef HAL_ETH_PTP_AddTimeOffset(ETH_HandleTypeDef *heth, ETH_PtpUpdateTypeDef ptpoffsettype,
-                                            ETH_TimeTypeDef *timeoffset);
-HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(ETH_HandleTypeDef *heth);
-HAL_StatusTypeDef HAL_ETH_PTP_GetTxTimestamp(ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp);
-HAL_StatusTypeDef HAL_ETH_PTP_GetRxTimestamp(ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp);
+HAL_StatusTypeDef HAL_ETH_PTP_SetConfig(ETH_HandleTypeDef *heth, const ETH_PTP_ConfigTypeDef *ptpconfig);
+HAL_StatusTypeDef HAL_ETH_PTP_GetConfig(const ETH_HandleTypeDef *heth, ETH_PTP_ConfigTypeDef *ptpconfig);
+HAL_StatusTypeDef HAL_ETH_PTP_SetTime(const ETH_HandleTypeDef *heth, const ETH_TimeTypeDef *time);
+HAL_StatusTypeDef HAL_ETH_PTP_GetTime(const ETH_HandleTypeDef *heth, ETH_TimeTypeDef *time);
+HAL_StatusTypeDef HAL_ETH_PTP_AddTimeOffset(const ETH_HandleTypeDef *heth, ETH_PtpUpdateTypeDef ptpoffsettype,
+                                            const ETH_TimeTypeDef *timeoffset);
+HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(const ETH_HandleTypeDef *heth);
+HAL_StatusTypeDef HAL_ETH_PTP_GetTxTimestamp(const ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp);
+HAL_StatusTypeDef HAL_ETH_PTP_GetRxTimestamp(const ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp);
 HAL_StatusTypeDef HAL_ETH_RegisterTxPtpCallback(ETH_HandleTypeDef *heth, pETH_txPtpCallbackTypeDef txPtpCallback);
 HAL_StatusTypeDef HAL_ETH_UnRegisterTxPtpCallback(ETH_HandleTypeDef *heth);
 #endif /* HAL_ETH_USE_PTP */
 
-HAL_StatusTypeDef HAL_ETH_Transmit(ETH_HandleTypeDef *heth, ETH_TxPacketConfigTypeDef *pTxConfig, uint32_t Timeout);
-HAL_StatusTypeDef HAL_ETH_Transmit_IT(ETH_HandleTypeDef *heth, ETH_TxPacketConfigTypeDef *pTxConfig);
+HAL_StatusTypeDef HAL_ETH_Transmit(ETH_HandleTypeDef *heth, const ETH_TxPacketConfigTypeDef *pTxConfig,
+                                   uint32_t Timeout);
+HAL_StatusTypeDef HAL_ETH_Transmit_IT(ETH_HandleTypeDef *heth, const ETH_TxPacketConfigTypeDef *pTxConfig);
 
 HAL_StatusTypeDef HAL_ETH_WritePHYRegister(const ETH_HandleTypeDef *heth, uint32_t PHYAddr, uint32_t PHYReg,
                                            uint32_t RegValue);
-HAL_StatusTypeDef HAL_ETH_ReadPHYRegister(ETH_HandleTypeDef *heth, uint32_t PHYAddr, uint32_t PHYReg,
+HAL_StatusTypeDef HAL_ETH_ReadPHYRegister(const ETH_HandleTypeDef *heth, uint32_t PHYAddr, uint32_t PHYReg,
                                           uint32_t *pRegValue);
 
 void              HAL_ETH_IRQHandler(ETH_HandleTypeDef *heth);
@@ -1790,26 +1791,27 @@ void              HAL_ETH_TxPtpCallback(uint32_t *buff, ETH_TimeStampTypeDef *ti
 /* MAC & DMA Configuration APIs  **********************************************/
 HAL_StatusTypeDef HAL_ETH_GetMACConfig(const ETH_HandleTypeDef *heth, ETH_MACConfigTypeDef *macconf);
 HAL_StatusTypeDef HAL_ETH_GetDMAConfig(const ETH_HandleTypeDef *heth, ETH_DMAConfigTypeDef *dmaconf);
-HAL_StatusTypeDef HAL_ETH_SetMACConfig(ETH_HandleTypeDef *heth, ETH_MACConfigTypeDef *macconf);
-HAL_StatusTypeDef HAL_ETH_SetDMAConfig(ETH_HandleTypeDef *heth, ETH_DMAConfigTypeDef *dmaconf);
-void              HAL_ETH_SetMDIOClockRange(ETH_HandleTypeDef *heth);
+HAL_StatusTypeDef HAL_ETH_SetMACConfig(const ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef *macconf);
+HAL_StatusTypeDef HAL_ETH_SetDMAConfig(const ETH_HandleTypeDef *heth, const ETH_DMAConfigTypeDef *dmaconf);
+void              HAL_ETH_SetMDIOClockRange(const ETH_HandleTypeDef *heth);
 
 /* MAC VLAN Processing APIs    ************************************************/
-void              HAL_ETH_SetRxVLANIdentifier(ETH_HandleTypeDef *heth, uint32_t ComparisonBits,
+void              HAL_ETH_SetRxVLANIdentifier(const ETH_HandleTypeDef *heth, uint32_t ComparisonBits,
                                               uint32_t VLANIdentifier);
 
 /* MAC L2 Packet Filtering APIs  **********************************************/
 HAL_StatusTypeDef HAL_ETH_GetMACFilterConfig(const ETH_HandleTypeDef *heth, ETH_MACFilterConfigTypeDef *pFilterConfig);
-HAL_StatusTypeDef HAL_ETH_SetMACFilterConfig(ETH_HandleTypeDef *heth, const ETH_MACFilterConfigTypeDef *pFilterConfig);
-HAL_StatusTypeDef HAL_ETH_SetHashTable(ETH_HandleTypeDef *heth, uint32_t *pHashTable);
+HAL_StatusTypeDef HAL_ETH_SetMACFilterConfig(const ETH_HandleTypeDef *heth,
+                                             const ETH_MACFilterConfigTypeDef *pFilterConfig);
+HAL_StatusTypeDef HAL_ETH_SetHashTable(const ETH_HandleTypeDef *heth, const uint32_t *pHashTable);
 HAL_StatusTypeDef HAL_ETH_SetSourceMACAddrMatch(const ETH_HandleTypeDef *heth, uint32_t AddrNbr,
                                                 const uint8_t *pMACAddr);
 
 /* MAC Power Down APIs    *****************************************************/
-void              HAL_ETH_EnterPowerDownMode(ETH_HandleTypeDef *heth,
+void              HAL_ETH_EnterPowerDownMode(const ETH_HandleTypeDef *heth,
                                              const ETH_PowerDownConfigTypeDef *pPowerDownConfig);
-void              HAL_ETH_ExitPowerDownMode(ETH_HandleTypeDef *heth);
-HAL_StatusTypeDef HAL_ETH_SetWakeUpFilter(ETH_HandleTypeDef *heth, uint32_t *pFilter, uint32_t Count);
+void              HAL_ETH_ExitPowerDownMode(const ETH_HandleTypeDef *heth);
+HAL_StatusTypeDef HAL_ETH_SetWakeUpFilter(const ETH_HandleTypeDef *heth, const uint32_t *pFilter, uint32_t Count);
 
 /**
   * @}

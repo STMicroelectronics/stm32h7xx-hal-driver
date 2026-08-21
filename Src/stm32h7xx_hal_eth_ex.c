@@ -94,7 +94,7 @@
   * @retval None
   */
 
-void HAL_ETHEx_EnableARPOffload(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_EnableARPOffload(const ETH_HandleTypeDef *heth)
 {
   SET_BIT(heth->Instance->MACCR, ETH_MACCR_ARP);
 }
@@ -105,7 +105,7 @@ void HAL_ETHEx_EnableARPOffload(ETH_HandleTypeDef *heth)
   *         the configuration information for ETHERNET module
   * @retval None
   */
-void HAL_ETHEx_DisableARPOffload(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_DisableARPOffload(const ETH_HandleTypeDef *heth)
 {
   CLEAR_BIT(heth->Instance->MACCR, ETH_MACCR_ARP);
 }
@@ -117,7 +117,7 @@ void HAL_ETHEx_DisableARPOffload(ETH_HandleTypeDef *heth)
   * @param  IpAddress: IP Address to be matched for incoming ARP requests
   * @retval None
   */
-void HAL_ETHEx_SetARPAddressMatch(ETH_HandleTypeDef *heth, uint32_t IpAddress)
+void HAL_ETHEx_SetARPAddressMatch(const ETH_HandleTypeDef *heth, uint32_t IpAddress)
 {
   WRITE_REG(heth->Instance->MACARPAR, IpAddress);
 }
@@ -135,7 +135,7 @@ void HAL_ETHEx_SetARPAddressMatch(ETH_HandleTypeDef *heth, uint32_t IpAddress)
   *         that contains L4 filter configuration.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETHEx_SetL4FilterConfig(ETH_HandleTypeDef *heth, uint32_t Filter,
+HAL_StatusTypeDef HAL_ETHEx_SetL4FilterConfig(const ETH_HandleTypeDef *heth, uint32_t Filter,
                                               const ETH_L4FilterConfigTypeDef *pL4FilterConfig)
 {
   if (pL4FilterConfig == NULL)
@@ -235,7 +235,7 @@ HAL_StatusTypeDef HAL_ETHEx_GetL4FilterConfig(const ETH_HandleTypeDef *heth, uin
   *         that contains L3 filter configuration.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETHEx_SetL3FilterConfig(ETH_HandleTypeDef *heth, uint32_t Filter,
+HAL_StatusTypeDef HAL_ETHEx_SetL3FilterConfig(const ETH_HandleTypeDef *heth, uint32_t Filter,
                                               const ETH_L3FilterConfigTypeDef *pL3FilterConfig)
 {
   if (pL3FilterConfig == NULL)
@@ -387,7 +387,7 @@ HAL_StatusTypeDef HAL_ETHEx_GetL3FilterConfig(const ETH_HandleTypeDef *heth, uin
   *         the configuration information for ETHERNET module
   * @retval None.
   */
-void HAL_ETHEx_EnableL3L4Filtering(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_EnableL3L4Filtering(const ETH_HandleTypeDef *heth)
 {
   /* Enable L3/L4 filter */
   SET_BIT(heth->Instance->MACPFR, ETH_MACPFR_IPFE);
@@ -399,7 +399,7 @@ void HAL_ETHEx_EnableL3L4Filtering(ETH_HandleTypeDef *heth)
   *         the configuration information for ETHERNET module
   * @retval None.
   */
-void HAL_ETHEx_DisableL3L4Filtering(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_DisableL3L4Filtering(const ETH_HandleTypeDef *heth)
 {
   /* Disable L3/L4 filter */
   CLEAR_BIT(heth->Instance->MACPFR, ETH_MACPFR_IPFE);
@@ -448,7 +448,7 @@ HAL_StatusTypeDef HAL_ETHEx_GetRxVLANConfig(const ETH_HandleTypeDef *heth, ETH_R
   *         that contains VLAN filter configuration.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETHEx_SetRxVLANConfig(ETH_HandleTypeDef *heth, const ETH_RxVLANConfigTypeDef *pVlanConfig)
+HAL_StatusTypeDef HAL_ETHEx_SetRxVLANConfig(const ETH_HandleTypeDef *heth, const ETH_RxVLANConfigTypeDef *pVlanConfig)
 {
   if (pVlanConfig == NULL)
   {
@@ -476,7 +476,7 @@ HAL_StatusTypeDef HAL_ETHEx_SetRxVLANConfig(ETH_HandleTypeDef *heth, const ETH_R
   * @param  VLANHashTable: VLAN hash table 16 bit value
   * @retval None
   */
-void HAL_ETHEx_SetVLANHashTable(ETH_HandleTypeDef *heth, uint32_t VLANHashTable)
+void HAL_ETHEx_SetVLANHashTable(const ETH_HandleTypeDef *heth, uint32_t VLANHashTable)
 {
   MODIFY_REG(heth->Instance->MACVHTR, ETH_MACVHTR_VLHT, VLANHashTable);
 }
@@ -527,7 +527,7 @@ HAL_StatusTypeDef HAL_ETHEx_GetTxVLANConfig(const ETH_HandleTypeDef *heth, uint3
   *         that contains Tx VLAN filter configuration.
   * @retval HAL Status
   */
-HAL_StatusTypeDef HAL_ETHEx_SetTxVLANConfig(ETH_HandleTypeDef *heth, uint32_t VLANTag,
+HAL_StatusTypeDef HAL_ETHEx_SetTxVLANConfig(const ETH_HandleTypeDef *heth, uint32_t VLANTag,
                                             const ETH_TxVLANConfigTypeDef *pVlanConfig)
 {
   if (VLANTag == ETH_INNER_TX_VLANTAG)
@@ -558,7 +558,7 @@ HAL_StatusTypeDef HAL_ETHEx_SetTxVLANConfig(ETH_HandleTypeDef *heth, uint32_t VL
   * @param  VLANIdentifier: VLAN Identifier 16 bit value
   * @retval None
   */
-void HAL_ETHEx_SetTxVLANIdentifier(ETH_HandleTypeDef *heth, uint32_t VLANTag, uint32_t VLANIdentifier)
+void HAL_ETHEx_SetTxVLANIdentifier(const ETH_HandleTypeDef *heth, uint32_t VLANTag, uint32_t VLANIdentifier)
 {
   if (VLANTag == ETH_INNER_TX_VLANTAG)
   {
@@ -576,7 +576,7 @@ void HAL_ETHEx_SetTxVLANIdentifier(ETH_HandleTypeDef *heth, uint32_t VLANTag, ui
   *         the configuration information for ETHERNET module
   * @retval None.
   */
-void HAL_ETHEx_EnableVLANProcessing(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_EnableVLANProcessing(const ETH_HandleTypeDef *heth)
 {
   /* Enable VLAN processing */
   SET_BIT(heth->Instance->MACPFR, ETH_MACPFR_VTFE);
@@ -588,7 +588,7 @@ void HAL_ETHEx_EnableVLANProcessing(ETH_HandleTypeDef *heth)
   *         the configuration information for ETHERNET module
   * @retval None.
   */
-void HAL_ETHEx_DisableVLANProcessing(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_DisableVLANProcessing(const ETH_HandleTypeDef *heth)
 {
   /* Disable VLAN processing */
   CLEAR_BIT(heth->Instance->MACPFR, ETH_MACPFR_VTFE);
@@ -602,7 +602,7 @@ void HAL_ETHEx_DisableVLANProcessing(ETH_HandleTypeDef *heth)
   * @param  TxClockStop: Enable/Disable Tx clock stop in LPI mode.
   * @retval None
   */
-void HAL_ETHEx_EnterLPIMode(ETH_HandleTypeDef *heth, FunctionalState TxAutomate, FunctionalState TxClockStop)
+void HAL_ETHEx_EnterLPIMode(const ETH_HandleTypeDef *heth, FunctionalState TxAutomate, FunctionalState TxClockStop)
 {
   /* Enable LPI Interrupts */
   __HAL_ETH_MAC_ENABLE_IT(heth, ETH_MACIER_LPIIE);
@@ -620,7 +620,7 @@ void HAL_ETHEx_EnterLPIMode(ETH_HandleTypeDef *heth, FunctionalState TxAutomate,
   *         the configuration information for ETHERNET module
   * @retval None
   */
-void HAL_ETHEx_ExitLPIMode(ETH_HandleTypeDef *heth)
+void HAL_ETHEx_ExitLPIMode(const ETH_HandleTypeDef *heth)
 {
   /* Clear the LPI Config and exit low power mode */
   CLEAR_BIT(heth->Instance->MACLCSR, (ETH_MACLCSR_LPIEN | ETH_MACLCSR_LPITXA | ETH_MACLCSR_LPITCSE));

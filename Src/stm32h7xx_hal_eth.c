@@ -251,8 +251,8 @@
 /** @defgroup ETH_Private_Functions   ETH Private Functions
   * @{
   */
-static void ETH_SetMACConfig(ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef *macconf);
-static void ETH_SetDMAConfig(ETH_HandleTypeDef *heth, const ETH_DMAConfigTypeDef *dmaconf);
+static void ETH_SetMACConfig(const ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef *macconf);
+static void ETH_SetDMAConfig(const ETH_HandleTypeDef *heth, const ETH_DMAConfigTypeDef *dmaconf);
 static void ETH_MACDMAConfig(ETH_HandleTypeDef *heth);
 static void ETH_DMATxDescListInit(ETH_HandleTypeDef *heth);
 static void ETH_DMARxDescListInit(ETH_HandleTypeDef *heth);
@@ -265,7 +265,7 @@ static void ETH_InitCallbacksToDefault(ETH_HandleTypeDef *heth);
 #endif /* USE_HAL_ETH_REGISTER_CALLBACKS */
 
 #ifdef HAL_ETH_USE_PTP
-static HAL_StatusTypeDef HAL_ETH_PTP_AddendUpdate(ETH_HandleTypeDef *heth, int32_t timeoffset);
+static HAL_StatusTypeDef HAL_ETH_PTP_AddendUpdate(const ETH_HandleTypeDef *heth, int32_t timeoffset);
 #endif /* HAL_ETH_USE_PTP */
 
 /**
@@ -910,7 +910,8 @@ HAL_StatusTypeDef HAL_ETH_Stop_IT(ETH_HandleTypeDef *heth)
   * @param  Timeout: timeout value
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_Transmit(ETH_HandleTypeDef *heth, ETH_TxPacketConfigTypeDef *pTxConfig, uint32_t Timeout)
+HAL_StatusTypeDef HAL_ETH_Transmit(ETH_HandleTypeDef *heth, const ETH_TxPacketConfigTypeDef *pTxConfig,
+                                   uint32_t Timeout)
 {
   uint32_t tickstart;
   ETH_DMADescTypeDef *dmatxdesc;
@@ -985,7 +986,7 @@ HAL_StatusTypeDef HAL_ETH_Transmit(ETH_HandleTypeDef *heth, ETH_TxPacketConfigTy
   * @param  pTxConfig: Hold the configuration of packet to be transmitted
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_Transmit_IT(ETH_HandleTypeDef *heth, ETH_TxPacketConfigTypeDef *pTxConfig)
+HAL_StatusTypeDef HAL_ETH_Transmit_IT(ETH_HandleTypeDef *heth, const ETH_TxPacketConfigTypeDef *pTxConfig)
 {
   if (pTxConfig == NULL)
   {
@@ -1523,7 +1524,7 @@ HAL_StatusTypeDef HAL_ETH_ReleaseTxPacket(ETH_HandleTypeDef *heth)
   *         the configuration information for PTP
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_SetConfig(ETH_HandleTypeDef *heth, ETH_PTP_ConfigTypeDef *ptpconfig)
+HAL_StatusTypeDef HAL_ETH_PTP_SetConfig(ETH_HandleTypeDef *heth, const ETH_PTP_ConfigTypeDef *ptpconfig)
 {
   uint32_t tmpTSCR;
   ETH_TimeTypeDef time;
@@ -1599,7 +1600,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_SetConfig(ETH_HandleTypeDef *heth, ETH_PTP_ConfigT
   *         the configuration information for PTP
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_GetConfig(ETH_HandleTypeDef *heth, ETH_PTP_ConfigTypeDef *ptpconfig)
+HAL_StatusTypeDef HAL_ETH_PTP_GetConfig(const ETH_HandleTypeDef *heth, ETH_PTP_ConfigTypeDef *ptpconfig)
 {
   if (ptpconfig == NULL)
   {
@@ -1649,7 +1650,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_GetConfig(ETH_HandleTypeDef *heth, ETH_PTP_ConfigT
   *         time to set
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_SetTime(ETH_HandleTypeDef *heth, ETH_TimeTypeDef *time)
+HAL_StatusTypeDef HAL_ETH_PTP_SetTime(const ETH_HandleTypeDef *heth, const ETH_TimeTypeDef *time)
 {
   if (heth->IsPtpConfigured == HAL_ETH_PTP_CONFIGURED)
   {
@@ -1680,7 +1681,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_SetTime(ETH_HandleTypeDef *heth, ETH_TimeTypeDef *
   *         time to get
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_GetTime(ETH_HandleTypeDef *heth, ETH_TimeTypeDef *time)
+HAL_StatusTypeDef HAL_ETH_PTP_GetTime(const ETH_HandleTypeDef *heth, ETH_TimeTypeDef *time)
 {
   if (heth->IsPtpConfigured == HAL_ETH_PTP_CONFIGURED)
   {
@@ -1707,8 +1708,8 @@ HAL_StatusTypeDef HAL_ETH_PTP_GetTime(ETH_HandleTypeDef *heth, ETH_TimeTypeDef *
   *         the time update information
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_AddTimeOffset(ETH_HandleTypeDef *heth, ETH_PtpUpdateTypeDef ptpoffsettype,
-                                            ETH_TimeTypeDef *timeoffset)
+HAL_StatusTypeDef HAL_ETH_PTP_AddTimeOffset(const ETH_HandleTypeDef *heth, ETH_PtpUpdateTypeDef ptpoffsettype,
+                                            const ETH_TimeTypeDef *timeoffset)
 {
   int32_t addendtime ;
   if (heth->IsPtpConfigured == HAL_ETH_PTP_CONFIGURED)
@@ -1767,7 +1768,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_AddTimeOffset(ETH_HandleTypeDef *heth, ETH_PtpUpda
   *         the addend register in Nanoseconds
   * @retval HAL status
   */
-static HAL_StatusTypeDef HAL_ETH_PTP_AddendUpdate(ETH_HandleTypeDef *heth, int32_t timeoffset)
+static HAL_StatusTypeDef HAL_ETH_PTP_AddendUpdate(const ETH_HandleTypeDef *heth, int32_t timeoffset)
 {
   uint32_t tmpreg;
   if (heth->IsPtpConfigured == HAL_ETH_PTP_CONFIGURED)
@@ -1799,7 +1800,7 @@ static HAL_StatusTypeDef HAL_ETH_PTP_AddendUpdate(ETH_HandleTypeDef *heth, int32
   *         the configuration information for ETHERNET module
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(ETH_HandleTypeDef *heth)
+HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(const ETH_HandleTypeDef *heth)
 {
   ETH_TxDescListTypeDef *dmatxdesclist = &heth->TxDescList;
   uint32_t descidx = dmatxdesclist->CurTxDesc;
@@ -1828,7 +1829,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(ETH_HandleTypeDef *heth)
   *         transmission timestamp
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_GetTxTimestamp(ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp)
+HAL_StatusTypeDef HAL_ETH_PTP_GetTxTimestamp(const ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp)
 {
   ETH_TxDescListTypeDef *dmatxdesclist = &heth->TxDescList;
   uint32_t idx =       dmatxdesclist->releaseIndex;
@@ -1859,7 +1860,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_GetTxTimestamp(ETH_HandleTypeDef *heth, ETH_TimeSt
   *         receive timestamp
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_PTP_GetRxTimestamp(ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp)
+HAL_StatusTypeDef HAL_ETH_PTP_GetRxTimestamp(const ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp)
 {
   if (heth->IsPtpConfigured == HAL_ETH_PTP_CONFIGURED)
   {
@@ -2214,7 +2215,7 @@ __weak void HAL_ETH_WakeUpCallback(ETH_HandleTypeDef *heth)
   * @param pRegValue: parameter to hold read value
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_ReadPHYRegister(ETH_HandleTypeDef *heth, uint32_t PHYAddr, uint32_t PHYReg,
+HAL_StatusTypeDef HAL_ETH_ReadPHYRegister(const ETH_HandleTypeDef *heth, uint32_t PHYAddr, uint32_t PHYReg,
                                           uint32_t *pRegValue)
 {
   uint32_t tickstart;
@@ -2447,7 +2448,7 @@ HAL_StatusTypeDef HAL_ETH_GetDMAConfig(const ETH_HandleTypeDef *heth, ETH_DMACon
   *         the configuration of the MAC.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_SetMACConfig(ETH_HandleTypeDef *heth,  ETH_MACConfigTypeDef *macconf)
+HAL_StatusTypeDef HAL_ETH_SetMACConfig(const ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef *macconf)
 {
   if (macconf == NULL)
   {
@@ -2474,7 +2475,7 @@ HAL_StatusTypeDef HAL_ETH_SetMACConfig(ETH_HandleTypeDef *heth,  ETH_MACConfigTy
   *         the configuration of the ETH DMA.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_SetDMAConfig(ETH_HandleTypeDef *heth,  ETH_DMAConfigTypeDef *dmaconf)
+HAL_StatusTypeDef HAL_ETH_SetDMAConfig(const ETH_HandleTypeDef *heth, const ETH_DMAConfigTypeDef *dmaconf)
 {
   if (dmaconf == NULL)
   {
@@ -2499,7 +2500,7 @@ HAL_StatusTypeDef HAL_ETH_SetDMAConfig(ETH_HandleTypeDef *heth,  ETH_DMAConfigTy
   *         the configuration information for ETHERNET module
   * @retval None
   */
-void HAL_ETH_SetMDIOClockRange(ETH_HandleTypeDef *heth)
+void HAL_ETH_SetMDIOClockRange(const ETH_HandleTypeDef *heth)
 {
   uint32_t hclk;
   uint32_t tmpreg;
@@ -2557,7 +2558,8 @@ void HAL_ETH_SetMDIOClockRange(ETH_HandleTypeDef *heth)
   *         the configuration of the ETH MAC filters.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_SetMACFilterConfig(ETH_HandleTypeDef *heth, const ETH_MACFilterConfigTypeDef *pFilterConfig)
+HAL_StatusTypeDef HAL_ETH_SetMACFilterConfig(const ETH_HandleTypeDef *heth,
+                                             const ETH_MACFilterConfigTypeDef *pFilterConfig)
 {
   uint32_t filterconfig;
 
@@ -2664,7 +2666,7 @@ HAL_StatusTypeDef HAL_ETH_SetSourceMACAddrMatch(const ETH_HandleTypeDef *heth, u
   *         the 64 bits of the hash table.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_ETH_SetHashTable(ETH_HandleTypeDef *heth, uint32_t *pHashTable)
+HAL_StatusTypeDef HAL_ETH_SetHashTable(const ETH_HandleTypeDef *heth, const uint32_t *pHashTable)
 {
   if (pHashTable == NULL)
   {
@@ -2686,7 +2688,7 @@ HAL_StatusTypeDef HAL_ETH_SetHashTable(ETH_HandleTypeDef *heth, uint32_t *pHashT
   * @param  VLANIdentifier: VLAN Identifier value
   * @retval None
   */
-void HAL_ETH_SetRxVLANIdentifier(ETH_HandleTypeDef *heth, uint32_t ComparisonBits, uint32_t VLANIdentifier)
+void HAL_ETH_SetRxVLANIdentifier(const ETH_HandleTypeDef *heth, uint32_t ComparisonBits, uint32_t VLANIdentifier)
 {
   if (ComparisonBits == ETH_VLANTAGCOMPARISON_16BIT)
   {
@@ -2708,7 +2710,7 @@ void HAL_ETH_SetRxVLANIdentifier(ETH_HandleTypeDef *heth, uint32_t ComparisonBit
   *         that contains the Power Down configuration
   * @retval None.
   */
-void HAL_ETH_EnterPowerDownMode(ETH_HandleTypeDef *heth, const ETH_PowerDownConfigTypeDef *pPowerDownConfig)
+void HAL_ETH_EnterPowerDownMode(const ETH_HandleTypeDef *heth, const ETH_PowerDownConfigTypeDef *pPowerDownConfig)
 {
   uint32_t powerdownconfig;
 
@@ -2730,7 +2732,7 @@ void HAL_ETH_EnterPowerDownMode(ETH_HandleTypeDef *heth, const ETH_PowerDownConf
   *         the configuration information for ETHERNET module
   * @retval None.
   */
-void HAL_ETH_ExitPowerDownMode(ETH_HandleTypeDef *heth)
+void HAL_ETH_ExitPowerDownMode(const ETH_HandleTypeDef *heth)
 {
   /* clear wake up sources */
   CLEAR_BIT(heth->Instance->MACPCSR, ETH_MACPCSR_RWKPKTEN | ETH_MACPCSR_MGKPKTEN | ETH_MACPCSR_GLBLUCAST |
@@ -2754,7 +2756,7 @@ void HAL_ETH_ExitPowerDownMode(ETH_HandleTypeDef *heth)
   * @param  Count: number of filter registers, must be from 1 to 8.
   * @retval None.
   */
-HAL_StatusTypeDef HAL_ETH_SetWakeUpFilter(ETH_HandleTypeDef *heth, uint32_t *pFilter, uint32_t Count)
+HAL_StatusTypeDef HAL_ETH_SetWakeUpFilter(const ETH_HandleTypeDef *heth, const uint32_t *pFilter, uint32_t Count)
 {
   uint32_t regindex;
 
@@ -2874,7 +2876,7 @@ uint32_t HAL_ETH_GetTxBuffersNumber(const ETH_HandleTypeDef *heth)
   * @{
   */
 
-static void ETH_SetMACConfig(ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef *macconf)
+static void ETH_SetMACConfig(const ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef *macconf)
 {
   uint32_t macregval;
 
@@ -2951,7 +2953,7 @@ static void ETH_SetMACConfig(ETH_HandleTypeDef *heth, const ETH_MACConfigTypeDef
   MODIFY_REG(heth->Instance->MTLRQOMR, ETH_MTLRQOMR_MASK, macregval);
 }
 
-static void ETH_SetDMAConfig(ETH_HandleTypeDef *heth, const ETH_DMAConfigTypeDef *dmaconf)
+static void ETH_SetDMAConfig(const ETH_HandleTypeDef *heth, const ETH_DMAConfigTypeDef *dmaconf)
 {
   uint32_t dmaregval;
 
