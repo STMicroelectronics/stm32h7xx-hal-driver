@@ -732,11 +732,8 @@ HAL_StatusTypeDef HAL_ETH_Start(ETH_HandleTypeDef *heth)
     /* Build all descriptors */
     ETH_UpdateDescriptor(heth);
 
-    /* Enable the MAC transmission */
-    SET_BIT(heth->Instance->MACCR, ETH_MACCR_TE);
-
-    /* Enable the MAC reception */
-    SET_BIT(heth->Instance->MACCR, ETH_MACCR_RE);
+    /* Enable the MAC transmission and reception */
+    SET_BIT(heth->Instance->MACCR, (ETH_MACCR_TE | ETH_MACCR_RE));
 
     /* Set the Flush Transmit FIFO bit */
     SET_BIT(heth->Instance->MTLTQOMR, ETH_MTLTQOMR_FTQ);
@@ -793,11 +790,8 @@ HAL_StatusTypeDef HAL_ETH_Start_IT(ETH_HandleTypeDef *heth)
     /* Set the Flush Transmit FIFO bit */
     SET_BIT(heth->Instance->MTLTQOMR, ETH_MTLTQOMR_FTQ);
 
-    /* Enable the MAC transmission */
-    SET_BIT(heth->Instance->MACCR, ETH_MACCR_TE);
-
-    /* Enable the MAC reception */
-    SET_BIT(heth->Instance->MACCR, ETH_MACCR_RE);
+    /* Enable the MAC transmission and reception */
+    SET_BIT(heth->Instance->MACCR, (ETH_MACCR_TE | ETH_MACCR_RE));
 
     /* Enable ETH DMA interrupts:
     - Tx complete interrupt
@@ -835,14 +829,11 @@ HAL_StatusTypeDef HAL_ETH_Stop(ETH_HandleTypeDef *heth)
     /* Disable the DMA reception */
     CLEAR_BIT(heth->Instance->DMACRCR, ETH_DMACRCR_SR);
 
-    /* Disable the MAC reception */
-    CLEAR_BIT(heth->Instance->MACCR, ETH_MACCR_RE);
+    /* Disable the MAC reception and transmission */
+    CLEAR_BIT(heth->Instance->MACCR, (ETH_MACCR_RE | ETH_MACCR_TE));
 
     /* Set the Flush Transmit FIFO bit */
     SET_BIT(heth->Instance->MTLTQOMR, ETH_MTLTQOMR_FTQ);
-
-    /* Disable the MAC transmission */
-    CLEAR_BIT(heth->Instance->MACCR, ETH_MACCR_TE);
 
     heth->gState = HAL_ETH_STATE_READY;
 
@@ -885,14 +876,11 @@ HAL_StatusTypeDef HAL_ETH_Stop_IT(ETH_HandleTypeDef *heth)
     /* Disable the DMA reception */
     CLEAR_BIT(heth->Instance->DMACRCR, ETH_DMACRCR_SR);
 
-    /* Disable the MAC reception */
-    CLEAR_BIT(heth->Instance->MACCR, ETH_MACCR_RE);
+    /* Disable the MAC reception and transmission */
+    CLEAR_BIT(heth->Instance->MACCR, (ETH_MACCR_RE | ETH_MACCR_TE));
 
     /* Set the Flush Transmit FIFO bit */
     SET_BIT(heth->Instance->MTLTQOMR, ETH_MTLTQOMR_FTQ);
-
-    /* Disable the MAC transmission */
-    CLEAR_BIT(heth->Instance->MACCR, ETH_MACCR_TE);
 
     /* Clear IOC bit to all Rx descriptors */
     for (descindex = 0; descindex < (uint32_t)ETH_RX_DESC_CNT; descindex++)
