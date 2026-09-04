@@ -2405,13 +2405,12 @@ typedef struct
   *         connected to pin Vref+.
   *         On devices with small package, the pin Vref+ is not present
   *         and internally bonded to pin Vdda.
-  * @note   On this STM32 series, calibration data of internal voltage reference
-  *         VrefInt corresponds to a resolution of 16 bits,
-  *         this is the recommended ADC resolution to convert voltage of
-  *         internal voltage reference VrefInt.
-  *         Otherwise, this macro performs the processing to scale
-  *         ADC conversion data to 16 bits.
-  * @param  __VREFINT_ADC_DATA__ ADC conversion data (resolution 16 bits)
+  * @note   On most derivatives of this STM32 series, calibration data of
+  *         internal voltage reference VrefInt corresponds to a resolution of
+  *         16 bits and this macro scales ADC conversion data to 16 bits.
+  * @note   On STM32H72x/H73x derivatives, this macro keeps the ADC conversion
+  *         data at current resolution.
+  * @param  __VREFINT_ADC_DATA__ ADC conversion data (unit: digital value)
   *         of internal voltage reference VrefInt (unit: digital value).
   * @param  __ADC_RESOLUTION__ This parameter can be one of the following values:
   *         @arg @ref LL_ADC_RESOLUTION_16B
@@ -2421,13 +2420,23 @@ typedef struct
   *         @arg @ref LL_ADC_RESOLUTION_8B
   * @retval Analog reference voltage (unit: mV)
   */
+#if defined(ADC_VER_V5_V90)
 #define __LL_ADC_CALC_VREFANALOG_VOLTAGE(__VREFINT_ADC_DATA__,\
                                          __ADC_RESOLUTION__)                   \
   (((uint32_t)(*VREFINT_CAL_ADDR) * VREFINT_CAL_VREF)                          \
     / __LL_ADC_CONVERT_DATA_RESOLUTION((__VREFINT_ADC_DATA__),                 \
                                        (__ADC_RESOLUTION__),                   \
-                                       LL_ADC_RESOLUTION_12B)                  \
+                                       (__ADC_RESOLUTION__))                   \
   )
+#else
+#define __LL_ADC_CALC_VREFANALOG_VOLTAGE(__VREFINT_ADC_DATA__,\
+                                         __ADC_RESOLUTION__)                   \
+  (((uint32_t)(*VREFINT_CAL_ADDR) * VREFINT_CAL_VREF)                          \
+    / __LL_ADC_CONVERT_DATA_RESOLUTION((__VREFINT_ADC_DATA__),                 \
+                                       (__ADC_RESOLUTION__),                   \
+                                       LL_ADC_RESOLUTION_16B)                  \
+  )
+#endif
 
 /**
   * @brief  Helper macro to calculate the temperature (unit: degree Celsius)
