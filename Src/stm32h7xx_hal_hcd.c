@@ -1272,6 +1272,7 @@ static void HCD_HC_IN_IRQHandler(HCD_HandleTypeDef *hhcd, uint8_t chnum)
 {
   const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   uint32_t USBx_BASE = (uint32_t)USBx;
+  uint32_t packet_count;
   uint32_t tmpreg;
 
   if (__HAL_HCD_GET_CH_FLAG(hhcd, chnum, USB_OTG_HCINT_AHBERR))
@@ -1359,7 +1360,23 @@ static void HCD_HC_IN_IRQHandler(HCD_HandleTypeDef *hhcd, uint8_t chnum)
 
     if (hhcd->Init.dma_enable == 1U)
     {
-      if ((((hhcd->hc[chnum].xfer_count + hhcd->hc[chnum].max_packet - 1U) / hhcd->hc[chnum].max_packet) & 1U) != 0U)
+      if (hhcd->hc[chnum].xfer_count == 0U)
+      {
+        packet_count = 1U;
+      }
+      else
+      {
+        packet_count = (hhcd->hc[chnum].xfer_count + hhcd->hc[chnum].max_packet - 1U) /
+                       hhcd->hc[chnum].max_packet;
+
+        if (((hhcd->hc[chnum].xfer_count % hhcd->hc[chnum].max_packet) == 0U) &&
+            (hhcd->hc[chnum].xfer_count < hhcd->hc[chnum].xfer_len))
+        {
+          packet_count++;
+        }
+      }
+
+      if ((packet_count & 1U) != 0U)
       {
         hhcd->hc[chnum].toggle_in ^= 1U;
       }
@@ -1633,8 +1650,8 @@ static void HCD_HC_OUT_IRQHandler(HCD_HandleTypeDef *hhcd, uint8_t chnum)
 {
   const USB_OTG_GlobalTypeDef *USBx = hhcd->Instance;
   uint32_t USBx_BASE = (uint32_t)USBx;
+  uint32_t packet_count;
   uint32_t tmpreg;
-  uint32_t num_packets;
 
   if (__HAL_HCD_GET_CH_FLAG(hhcd, chnum, USB_OTG_HCINT_AHBERR))
   {
@@ -1778,21 +1795,30 @@ static void HCD_HC_OUT_IRQHandler(HCD_HandleTypeDef *hhcd, uint8_t chnum)
       hhcd->hc[chnum].state = HC_HALTED;
       hhcd->hc[chnum].urb_state = URB_DONE;
 
-      if ((hhcd->hc[chnum].ep_type == EP_TYPE_BULK) ||
-          (hhcd->hc[chnum].ep_type == EP_TYPE_INTR))
+      if (hhcd->hc[chnum].ep_type != EP_TYPE_ISOC)
       {
         if (hhcd->Init.dma_enable == 0U)
         {
           hhcd->hc[chnum].toggle_out ^= 1U;
         }
-
-        if ((hhcd->Init.dma_enable == 1U) && (hhcd->hc[chnum].xfer_len > 0U))
+        else
         {
-          num_packets = (hhcd->hc[chnum].xfer_len + hhcd->hc[chnum].max_packet - 1U) / hhcd->hc[chnum].max_packet;
-
-          if ((num_packets & 1U) != 0U)
+          if ((hhcd->hc[chnum].ep_type == EP_TYPE_BULK) ||
+              (hhcd->hc[chnum].ep_type == EP_TYPE_INTR))
           {
-            hhcd->hc[chnum].toggle_out ^= 1U;
+            if (hhcd->hc[chnum].xfer_len == 0U)
+            {
+              packet_count = 1U;
+            }
+            else
+            {
+              packet_count = (hhcd->hc[chnum].xfer_len + hhcd->hc[chnum].max_packet - 1U) / hhcd->hc[chnum].max_packet;
+            }
+
+            if ((packet_count & 1U) != 0U)
+            {
+              hhcd->hc[chnum].toggle_out ^= 1U;
+            }
           }
         }
       }
