@@ -2944,7 +2944,7 @@ static void CRYP_CopyPartialOutputWord(uint32_t *pOutputWord, uint32_t word, uin
   */
 static HAL_StatusTypeDef CRYP_AESGCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t Timeout)
 {
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
   uint32_t wordsize = (uint32_t)(hcryp->Size) / 4U;
   uint32_t npblb ;
   uint32_t temp[4] = {0};  /* Temporary CrypOutBuff */
@@ -3005,7 +3005,10 @@ static HAL_StatusTypeDef CRYP_AESGCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t
     __HAL_CRYP_ENABLE(hcryp);
 
     /* Get tick */
-    tickstart = HAL_GetTick();
+    if (Timeout != HAL_MAX_DELAY)
+    {
+      tickstart = HAL_GetTick();
+    }
 
     /*Wait for the CRYPEN bit to be cleared*/
     while ((hcryp->Instance->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
@@ -3066,7 +3069,10 @@ static HAL_StatusTypeDef CRYP_AESGCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t
   }
 
   /* Get tick */
-  tickstart = HAL_GetTick();
+  if (Timeout != HAL_MAX_DELAY)
+  {
+    tickstart = HAL_GetTick();
+  }
   /*Temporary CrypOutCount Value*/
   outcount = hcryp->CrypOutCount;
 
@@ -3541,7 +3547,7 @@ static HAL_StatusTypeDef CRYP_AESGCM_Process_DMA(CRYP_HandleTypeDef *hcryp)
   */
 static HAL_StatusTypeDef CRYP_AESCCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t Timeout)
 {
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
   uint32_t wordsize = (uint32_t)(hcryp->Size) / 4U;
   uint32_t npblb ;
   uint32_t lastwordsize ;
@@ -3651,7 +3657,10 @@ static HAL_StatusTypeDef CRYP_AESCCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t
     }
 #endif /* CRYP_VER_2_2 */
     /* Get tick */
-    tickstart = HAL_GetTick();
+    if (Timeout != HAL_MAX_DELAY)
+    {
+      tickstart = HAL_GetTick();
+    }
 
     /*Wait for the CRYPEN bit to be cleared*/
     while ((hcryp->Instance->CR & CRYP_CR_CRYPEN) == CRYP_CR_CRYPEN)
@@ -3712,7 +3721,10 @@ static HAL_StatusTypeDef CRYP_AESCCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t
     wordsize = ((wordsize / 4U) * 4U) ;
   }
   /* Get tick */
-  tickstart = HAL_GetTick();
+  if (Timeout != HAL_MAX_DELAY)
+  {
+    tickstart = HAL_GetTick();
+  }
 
   /*Temporary CrypOutCount Value*/
   outcount = hcryp->CrypOutCount;
@@ -5243,10 +5255,13 @@ static void CRYP_Workaround(CRYP_HandleTypeDef *hcryp, uint32_t Timeout)
   */
 static HAL_StatusTypeDef CRYP_WaitOnIFEMFlag(const CRYP_HandleTypeDef *hcryp, uint32_t Timeout)
 {
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
 
   /* Get timeout */
-  tickstart = HAL_GetTick();
+  if (Timeout != HAL_MAX_DELAY)
+  {
+    tickstart = HAL_GetTick();
+  }
 
   while (HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_IFEM))
   {
@@ -5270,10 +5285,13 @@ static HAL_StatusTypeDef CRYP_WaitOnIFEMFlag(const CRYP_HandleTypeDef *hcryp, ui
   */
 static HAL_StatusTypeDef CRYP_WaitOnBUSYFlag(const CRYP_HandleTypeDef *hcryp, uint32_t Timeout)
 {
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
 
   /* Get timeout */
-  tickstart = HAL_GetTick();
+  if (Timeout != HAL_MAX_DELAY)
+  {
+    tickstart = HAL_GetTick();
+  }
 
   while (HAL_IS_BIT_SET(hcryp->Instance->SR, CRYP_FLAG_BUSY))
   {
@@ -5299,10 +5317,13 @@ static HAL_StatusTypeDef CRYP_WaitOnBUSYFlag(const CRYP_HandleTypeDef *hcryp, ui
   */
 static HAL_StatusTypeDef CRYP_WaitOnOFNEFlag(const CRYP_HandleTypeDef  *hcryp, uint32_t Timeout)
 {
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
 
   /* Get timeout */
-  tickstart = HAL_GetTick();
+  if (Timeout != HAL_MAX_DELAY)
+  {
+    tickstart = HAL_GetTick();
+  }
 
   while (HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
   {

@@ -110,7 +110,7 @@
 HAL_StatusTypeDef HAL_CRYPEx_AESGCM_GenerateAuthTAG(CRYP_HandleTypeDef *hcryp, const uint32_t *AuthTag,
                                                     uint32_t Timeout)
 {
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
   uint64_t headerlength = (uint64_t)(hcryp->Init.HeaderSize) * 32U; /* Header length in bits */
   uint64_t inputlength = (uint64_t)hcryp->SizesSum * 8U; /* Input length in bits */
   uint32_t tagaddr = (uint32_t)AuthTag;
@@ -213,7 +213,10 @@ HAL_StatusTypeDef HAL_CRYPEx_AESGCM_GenerateAuthTAG(CRYP_HandleTypeDef *hcryp, c
     }
 #endif /*End of not defined CRYP_VER_2_2*/
     /* Wait for OFNE flag to be raised */
-    tickstart = HAL_GetTick();
+    if (Timeout != HAL_MAX_DELAY)
+    {
+      tickstart = HAL_GetTick();
+    }
     while (HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
       /* Check for the Timeout */
@@ -280,7 +283,7 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_GenerateAuthTAG(CRYP_HandleTypeDef *hcryp, c
   uint32_t tagaddr = (uint32_t)AuthTag;
   uint32_t ctr0 [4] = {0};
   uint32_t ctr0addr = (uint32_t)ctr0;
-  uint32_t tickstart;
+  uint32_t tickstart = 0U;
 
   if (hcryp->State == HAL_CRYP_STATE_READY)
   {
@@ -387,7 +390,10 @@ HAL_StatusTypeDef HAL_CRYPEx_AESCCM_GenerateAuthTAG(CRYP_HandleTypeDef *hcryp, c
     }
 #endif /*End of not defined CRYP_VER_2_2*/
     /* Wait for OFNE flag to be raised */
-    tickstart = HAL_GetTick();
+    if (Timeout != HAL_MAX_DELAY)
+    {
+      tickstart = HAL_GetTick();
+    }
     while (HAL_IS_BIT_CLR(hcryp->Instance->SR, CRYP_FLAG_OFNE))
     {
       /* Check for the Timeout */
