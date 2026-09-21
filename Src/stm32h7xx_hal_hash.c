@@ -2018,7 +2018,13 @@ static void HASH_GetDigest(const uint8_t *pMsgDigest, uint8_t Size)
 static HAL_StatusTypeDef HASH_WaitOnFlagUntilTimeout(HASH_HandleTypeDef *hhash, uint32_t Flag, FlagStatus Status,
                                                      uint32_t Timeout)
 {
-  uint32_t tickstart = HAL_GetTick();
+  uint32_t tickstart = 0U;
+
+  /* Get tick */
+  if (Timeout != HAL_MAX_DELAY)
+  {
+    tickstart = HAL_GetTick();
+  }
 
   /* Wait until flag is set */
   if (Status == RESET)
