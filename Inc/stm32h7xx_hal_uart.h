@@ -1292,16 +1292,16 @@ typedef  void (*pUART_RxEventCallbackTypeDef)
 #define IS_UART_BAUDRATE(__BAUDRATE__) ((__BAUDRATE__) <= 12500000U)
 
 /** @brief  Check UART assertion time.
-  * @param  __TIME__ 5-bit value assertion time.
+  * @param  __ASSERTIONTIME__ 5-bit value assertion time.
   * @retval Test result (TRUE or FALSE).
   */
-#define IS_UART_ASSERTIONTIME(__TIME__)    ((__TIME__) <= 0x1FU)
+#define IS_UART_ASSERTIONTIME(__ASSERTIONTIME__)    ((__ASSERTIONTIME__) <= 0x1FU)
 
 /** @brief  Check UART deassertion time.
-  * @param  __TIME__ 5-bit value deassertion time.
+  * @param  __DEASSERTIONTIME__ 5-bit value deassertion time.
   * @retval Test result (TRUE or FALSE).
   */
-#define IS_UART_DEASSERTIONTIME(__TIME__) ((__TIME__) <= 0x1FU)
+#define IS_UART_DEASSERTIONTIME(__DEASSERTIONTIME__) ((__DEASSERTIONTIME__) <= 0x1FU)
 
 /**
   * @brief Ensure that UART frame number of stop bits is valid.
