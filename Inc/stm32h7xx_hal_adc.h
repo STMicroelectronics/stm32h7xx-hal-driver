@@ -1198,17 +1198,17 @@ typedef  void (*pADC_CallbackTypeDef)(ADC_HandleTypeDef *hadc); /*!< pointer to 
 
 /**
   * @brief Verify the ADC conversions sampling time.
-  * @param __TIME__ ADC conversions sampling time.
-  * @retval SET (__TIME__ is a valid value) or RESET (__TIME__ is invalid)
+  * @param __SAMPLETIME__ ADC conversions sampling time.
+  * @retval SET (__SAMPLETIME__ is a valid value) or RESET (__SAMPLETIME__ is invalid)
   */
-#define IS_ADC_SAMPLE_TIME(__TIME__) (((__TIME__) == ADC_SAMPLETIME_1CYCLE_5)    || \
-                                      ((__TIME__) == ADC_SAMPLETIME_2CYCLES_5)   || \
-                                      ((__TIME__) == ADC_SAMPLETIME_8CYCLES_5)   || \
-                                      ((__TIME__) == ADC_SAMPLETIME_16CYCLES_5)  || \
-                                      ((__TIME__) == ADC_SAMPLETIME_32CYCLES_5)  || \
-                                      ((__TIME__) == ADC_SAMPLETIME_64CYCLES_5)  || \
-                                      ((__TIME__) == ADC_SAMPLETIME_387CYCLES_5) || \
-                                      ((__TIME__) == ADC_SAMPLETIME_810CYCLES_5)   )
+#define IS_ADC_SAMPLE_TIME(__SAMPLETIME__) (((__SAMPLETIME__) == ADC_SAMPLETIME_1CYCLE_5)    || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_2CYCLES_5)   || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_8CYCLES_5)   || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_16CYCLES_5)  || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_32CYCLES_5)  || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_64CYCLES_5)  || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_387CYCLES_5) || \
+                                      ((__SAMPLETIME__) == ADC_SAMPLETIME_810CYCLES_5)   )
 
 /**
   * @brief Verify the ADC regular channel setting.
