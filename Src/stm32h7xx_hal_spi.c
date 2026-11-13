@@ -2168,18 +2168,18 @@ HAL_StatusTypeDef HAL_SPI_Transmit_DMA(SPI_HandleTypeDef *hspi, const uint8_t *p
   {
     if (hspi->hdmatx->Init.MemDataAlignment == DMA_MDATAALIGN_HALFWORD)
     {
-      hspi->TxXferCount = (hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->TxXferCount = (uint16_t)(hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
     }
     if (hspi->hdmatx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->TxXferCount = (hspi->TxXferCount + (uint16_t) 3UL) >> 2UL;
+      hspi->TxXferCount = (uint16_t)(hspi->TxXferCount + (uint16_t) 3UL) >> 2UL;
     }
   }
   else if (hspi->Init.DataSize <= SPI_DATASIZE_16BIT)
   {
     if (hspi->hdmatx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->TxXferCount = (hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->TxXferCount = (uint16_t)(hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
     }
   }
   else
@@ -2318,18 +2318,18 @@ HAL_StatusTypeDef HAL_SPI_Receive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, u
   {
     if (hspi->hdmarx->Init.MemDataAlignment == DMA_MDATAALIGN_HALFWORD)
     {
-      hspi->RxXferCount = (hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->RxXferCount = (uint16_t)(hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
     }
     if (hspi->hdmarx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->RxXferCount = (hspi->RxXferCount + (uint16_t) 3UL) >> 2UL;
+      hspi->RxXferCount = (uint16_t)(hspi->RxXferCount + (uint16_t) 3UL) >> 2UL;
     }
   }
   else if (hspi->Init.DataSize <= SPI_DATASIZE_16BIT)
   {
     if (hspi->hdmarx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->RxXferCount = (hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->RxXferCount = (uint16_t)(hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
     }
   }
   else
@@ -2464,30 +2464,30 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive_DMA(SPI_HandleTypeDef *hspi, const uin
   {
     if (hspi->hdmatx->Init.MemDataAlignment == DMA_MDATAALIGN_HALFWORD)
     {
-      hspi->TxXferCount = (hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->TxXferCount = (uint16_t)(hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
     }
     if (hspi->hdmatx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->TxXferCount = (hspi->TxXferCount + (uint16_t) 3UL) >> 2UL;
+      hspi->TxXferCount = (uint16_t)(hspi->TxXferCount + (uint16_t) 3UL) >> 2UL;
     }
     if (hspi->hdmarx->Init.MemDataAlignment == DMA_MDATAALIGN_HALFWORD)
     {
-      hspi->RxXferCount = (hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->RxXferCount = (uint16_t)(hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
     }
     if (hspi->hdmarx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->RxXferCount = (hspi->RxXferCount + (uint16_t) 3UL) >> 2UL;
+      hspi->RxXferCount = (uint16_t)(hspi->RxXferCount + (uint16_t) 3UL) >> 2UL;
     }
   }
   else if (hspi->Init.DataSize <= SPI_DATASIZE_16BIT)
   {
     if (hspi->hdmatx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->TxXferCount = (hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->TxXferCount = (uint16_t)(hspi->TxXferCount + (uint16_t) 1UL) >> 1UL;
     }
     if (hspi->hdmarx->Init.MemDataAlignment == DMA_MDATAALIGN_WORD)
     {
-      hspi->RxXferCount = (hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
+      hspi->RxXferCount = (uint16_t)(hspi->RxXferCount + (uint16_t) 1UL) >> 1UL;
     }
   }
   else
@@ -4042,6 +4042,7 @@ static uint32_t SPI_GetPacketSize(const SPI_HandleTypeDef *hspi)
 
   return data_size * fifo_threashold;
 }
+
 
 /**
   * @}

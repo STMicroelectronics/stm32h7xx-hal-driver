@@ -637,19 +637,19 @@ HAL_StatusTypeDef HAL_SDIO_SetSpeedMode(SDIO_HandleTypeDef *hsdio, uint32_t Data
   switch (DataRate)
   {
     case HAL_SDIOS_DATA_RATE_SDR25:
-      data = SDIO_BUS_SPEED_SDR25;
+      data = (uint8_t)SDIO_BUS_SPEED_SDR25;
       errorstate = SDIO_WriteDirect(hsdio, SDMMC_SDIO_CCCR16_SD_BYTE3, HAL_SDIO_WRITE_ONLY, SDIO_FUNCTION_0, &data);
       break;
 
     case HAL_SDIOS_DATA_RATE_SDR50:
-      data = SDIO_BUS_SPEED_SDR50;
+      data = (uint8_t)SDIO_BUS_SPEED_SDR50;
       errorstate = SDIO_WriteDirect(hsdio, ((SDIO_FUNCTION_0 << 2U) | (SDIO_FUNCTION_0 << 1U) | (SDIO_FUNCTION_0 << 14U)
                                             | SDMMC_SDIO_CCCR16_SD_BYTE3), HAL_SDIO_WRITE_ONLY, SDIO_FUNCTION_0, &data);
       MODIFY_REG(hsdio->Instance->CLKCR, SDMMC_CLKCR_BUSSPEED, SDMMC_CLKCR_BUSSPEED);
       break;
 
     case HAL_SDIOS_DATA_RATE_DDR50:
-      data = SDIO_BUS_SPEED_DDR50;
+      data = (uint8_t)SDIO_BUS_SPEED_DDR50;
       errorstate = SDIO_WriteDirect(hsdio, ((SDIO_FUNCTION_0 << 2) | (SDIO_FUNCTION_0 << 1) | (SDIO_FUNCTION_0 << 14) |
                                             SDMMC_SDIO_CCCR16_SD_BYTE3), HAL_SDIO_WRITE_ONLY, SDIO_FUNCTION_0, &data);
       MODIFY_REG(hsdio->Instance->CLKCR, SDMMC_CLKCR_DDR | SDMMC_CLKCR_BUSSPEED,
@@ -2470,7 +2470,7 @@ HAL_StatusTypeDef HAL_SDIO_DisableIOAsynInterrupt(SDIO_HandleTypeDef *hsdio)
   * @brief sdio set io IRQ handler.
   * @param hsdio  Pointer to SDIO handle
   * @param IOFunction IO function io number.
-  * @param Callback io IRQ handler.
+  * @param pCallback io IRQ handler.
   */
 HAL_StatusTypeDef HAL_SDIO_RegisterIOFunctionCallback(SDIO_HandleTypeDef *hsdio, uint32_t IOFunction,
                                                       HAL_SDIO_IOFunction_CallbackTypeDef pCallback)
@@ -2588,9 +2588,11 @@ static HAL_StatusTypeDef SDIO_InitCard(SDIO_HandleTypeDef *hsdio)
 
 /**
   * @brief  Read 1 byte data.
-  * @param  hsdio: Pointer to SDIO handle
-  * @param  cmd_arg: formatted CMD52 structure
-  * @param  pData: pointer to write or read data
+  * @param  hsdio        : Pointer to SDIO handle
+  * @param  addr         : Specifies the SDIO address
+  * @param  raw          : Specifies the SDIO raw
+  * @param  function_nbr : Specifies the SDIO function number
+  * @param  pData        : pointer to write or read data
   * @retval HAL status
   */
 static HAL_StatusTypeDef SDIO_ReadDirect(SDIO_HandleTypeDef *hsdio, uint32_t addr, uint32_t raw,
@@ -2623,9 +2625,11 @@ static HAL_StatusTypeDef SDIO_ReadDirect(SDIO_HandleTypeDef *hsdio, uint32_t add
 
 /**
   * @brief  Write 1 byte data.
-  * @param  hsdio: Pointer to SDIO handle
-  * @param  cmd_arg: formatted CMD52 structure
-  * @param  pData: pointer to write or read data
+  * @param  hsdio        : Pointer to SDIO handle
+  * @param  addr         : Specifies the SDIO address
+  * @param  raw          : Specifies the SDIO raw
+  * @param  function_nbr : Specifies the SDIO function number
+  * @param  pData        : pointer to write or read data
   * @retval HAL status
   */
 static HAL_StatusTypeDef SDIO_WriteDirect(SDIO_HandleTypeDef *hsdio, uint32_t addr, uint32_t raw,

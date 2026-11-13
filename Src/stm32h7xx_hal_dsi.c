@@ -306,7 +306,7 @@ static HAL_StatusTypeDef DSI_ShortWrite(DSI_HandleTypeDef *hdsi,
   *                  the PLL Clock structure definition for the DSI.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DSI_Init(DSI_HandleTypeDef *hdsi, DSI_PLLInitTypeDef *PLLInit)
+HAL_StatusTypeDef HAL_DSI_Init(DSI_HandleTypeDef *hdsi, const DSI_PLLInitTypeDef *PLLInit)
 {
   uint32_t tickstart;
   uint32_t unitIntervalx4;
@@ -1088,7 +1088,7 @@ HAL_StatusTypeDef HAL_DSI_SetGenericVCID(DSI_HandleTypeDef *hdsi, uint32_t Virtu
   *                the DSI video mode configuration parameters
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DSI_ConfigVideoMode(DSI_HandleTypeDef *hdsi, DSI_VidCfgTypeDef *VidCfg)
+HAL_StatusTypeDef HAL_DSI_ConfigVideoMode(DSI_HandleTypeDef *hdsi, const DSI_VidCfgTypeDef *VidCfg)
 {
   /* Process locked */
   __HAL_LOCK(hdsi);
@@ -1238,7 +1238,7 @@ HAL_StatusTypeDef HAL_DSI_ConfigVideoMode(DSI_HandleTypeDef *hdsi, DSI_VidCfgTyp
   *                 the DSI command mode configuration parameters
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DSI_ConfigAdaptedCommandMode(DSI_HandleTypeDef *hdsi, DSI_CmdCfgTypeDef *CmdCfg)
+HAL_StatusTypeDef HAL_DSI_ConfigAdaptedCommandMode(DSI_HandleTypeDef *hdsi, const DSI_CmdCfgTypeDef *CmdCfg)
 {
   /* Process locked */
   __HAL_LOCK(hdsi);
@@ -1309,7 +1309,7 @@ HAL_StatusTypeDef HAL_DSI_ConfigAdaptedCommandMode(DSI_HandleTypeDef *hdsi, DSI_
   *                the DSI command transmission mode configuration parameters
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DSI_ConfigCommand(DSI_HandleTypeDef *hdsi, DSI_LPCmdTypeDef *LPCmd)
+HAL_StatusTypeDef HAL_DSI_ConfigCommand(DSI_HandleTypeDef *hdsi, const DSI_LPCmdTypeDef *LPCmd)
 {
   /* Process locked */
   __HAL_LOCK(hdsi);
@@ -1398,7 +1398,7 @@ HAL_StatusTypeDef HAL_DSI_ConfigFlowControl(DSI_HandleTypeDef *hdsi, uint32_t Fl
   *                    the DSI PHY timing parameters
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DSI_ConfigPhyTimer(DSI_HandleTypeDef *hdsi, DSI_PHY_TimerTypeDef *PhyTimers)
+HAL_StatusTypeDef HAL_DSI_ConfigPhyTimer(DSI_HandleTypeDef *hdsi, const DSI_PHY_TimerTypeDef *PhyTimers)
 {
   uint32_t maxTime;
   /* Process locked */
@@ -1445,7 +1445,7 @@ HAL_StatusTypeDef HAL_DSI_ConfigPhyTimer(DSI_HandleTypeDef *hdsi, DSI_PHY_TimerT
   *                       the DSI host timeout parameters
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DSI_ConfigHostTimeouts(DSI_HandleTypeDef *hdsi, DSI_HOST_TimeoutTypeDef *HostTimeouts)
+HAL_StatusTypeDef HAL_DSI_ConfigHostTimeouts(DSI_HandleTypeDef *hdsi, const DSI_HOST_TimeoutTypeDef *HostTimeouts)
 {
   /* Process locked */
   __HAL_LOCK(hdsi);

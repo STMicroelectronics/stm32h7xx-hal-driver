@@ -37,9 +37,29 @@ extern "C" {
   */
 
 /* Exported types ------------------------------------------------------------*/
+/**
+  * @brief  Approximate number of CPU cycles consumed by one register-poll loop
+  *         iteration. Adjust if cycle-accurate timing matters.
+  */
+#ifndef HAL_USB_CYCLES_PER_POLL
+#define HAL_USB_CYCLES_PER_POLL                                       (4U)
+#endif /* HAL_USB_CYCLES_PER_POLL */
+
+/**
+  * @brief  USB HAL Timeout in milliseconds (used as an upper bound for
+  *         register-poll loops).
+  */
 #ifndef HAL_USB_TIMEOUT
-#define HAL_USB_TIMEOUT                                       0xF000000U
+#define HAL_USB_TIMEOUT                                              (20U)
 #endif /* define HAL_USB_TIMEOUT */
+
+/**
+  * @brief  Convert a millisecond timeout to a worst-case loop iteration count.
+  *         Uses SystemCoreClock so the bound scales with the CPU frequency.
+  *         The result is a conservative upper bound safe across all supported speeds.
+  */
+#define HAL_USB_SYSTEMCLOCK_MS(timeout_ms) \
+  (((SystemCoreClock / 1000U) / HAL_USB_CYCLES_PER_POLL) * (timeout_ms))
 
 #ifndef HAL_USB_CURRENT_MODE_MAX_DELAY_MS
 #define HAL_USB_CURRENT_MODE_MAX_DELAY_MS                           200U
@@ -68,7 +88,8 @@ typedef enum
   URB_NYET,
   URB_ERROR,
   URB_STALL,
-  URB_NAK_WAIT
+  URB_NAK_WAIT,
+  URB_NYET_WAIT
 } USB_URBStateTypeDef;
 
 /**
@@ -554,7 +575,7 @@ HAL_StatusTypeDef USB_ActivateSetup(const USB_OTG_GlobalTypeDef *USBx);
 HAL_StatusTypeDef USB_EP0_OutStart(const USB_OTG_GlobalTypeDef *USBx, uint8_t dma, const uint8_t *psetup);
 uint8_t           USB_GetDevSpeed(const USB_OTG_GlobalTypeDef *USBx);
 uint32_t          USB_GetMode(const USB_OTG_GlobalTypeDef *USBx);
-uint32_t          USB_ReadInterrupts(USB_OTG_GlobalTypeDef const *USBx);
+uint32_t          USB_ReadInterrupts(const USB_OTG_GlobalTypeDef *USBx);
 uint32_t          USB_ReadChInterrupts(const USB_OTG_GlobalTypeDef *USBx, uint8_t chnum);
 uint32_t          USB_ReadDevAllOutEpInterrupt(const USB_OTG_GlobalTypeDef *USBx);
 uint32_t          USB_ReadDevOutEPInterrupt(const USB_OTG_GlobalTypeDef *USBx, uint8_t epnum);
@@ -566,8 +587,8 @@ HAL_StatusTypeDef USB_InitFSLSPClkSel(const USB_OTG_GlobalTypeDef *USBx, uint8_t
 HAL_StatusTypeDef USB_HostInit(USB_OTG_GlobalTypeDef *USBx, USB_OTG_CfgTypeDef cfg);
 HAL_StatusTypeDef USB_ResetPort(const USB_OTG_GlobalTypeDef *USBx);
 HAL_StatusTypeDef USB_DriveVbus(const USB_OTG_GlobalTypeDef *USBx, uint8_t state);
-uint32_t          USB_GetHostSpeed(USB_OTG_GlobalTypeDef const *USBx);
-uint32_t          USB_GetCurrentFrame(USB_OTG_GlobalTypeDef const *USBx);
+uint32_t          USB_GetHostSpeed(const USB_OTG_GlobalTypeDef *USBx);
+uint32_t          USB_GetCurrentFrame(const USB_OTG_GlobalTypeDef *USBx);
 HAL_StatusTypeDef USB_DoPing(const USB_OTG_GlobalTypeDef *USBx, uint8_t ch_num);
 HAL_StatusTypeDef USB_StopHost(USB_OTG_GlobalTypeDef *USBx);
 

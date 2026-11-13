@@ -1,6 +1,6 @@
 # STM32CubeH7 HAL Driver MCU Component
 
-![tag](https://img.shields.io/badge/tag-v1.11.6-brightgreen.svg)
+![tag](https://img.shields.io/badge/tag-v1.11.7-brightgreen.svg)
 
 ## Overview
 

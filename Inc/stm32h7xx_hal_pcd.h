@@ -108,7 +108,6 @@ typedef struct
   uint32_t                BESL;
   uint32_t                FrameNumber; /*!< Store Current Frame number        */
 
-
   uint32_t lpm_active;                 /*!< Enable or disable the Link Power Management .
                                        This parameter can be set to ENABLE or DISABLE        */
 
@@ -164,6 +163,7 @@ typedef struct
   */
 #define PCD_PHY_ULPI                 1U
 #define PCD_PHY_EMBEDDED             2U
+#define PCD_HS_PHY_EMBEDDED          3U
 #define PCD_PHY_UTMI                 3U
 /**
   * @}
@@ -214,7 +214,6 @@ typedef struct
 #define __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_IT()    EXTI_D1->IMR2 |= (USB_OTG_FS_WAKEUP_EXTI_LINE)
 #define __HAL_USB_OTG_FS_WAKEUP_EXTI_DISABLE_IT()   EXTI_D1->IMR2 &= ~(USB_OTG_FS_WAKEUP_EXTI_LINE)
 #endif /* defined (USB_OTG_FS) || defined (USB_OTG_HS) */
-
 
 /**
   * @}
@@ -355,7 +354,7 @@ HAL_StatusTypeDef HAL_PCD_DeActivateRemoteWakeup(PCD_HandleTypeDef *hpcd);
 HAL_StatusTypeDef HAL_PCD_SetTestMode(const PCD_HandleTypeDef *hpcd, uint8_t testmode);
 #endif /* defined (USB_OTG_FS) || defined (USB_OTG_HS) */
 
-uint32_t          HAL_PCD_EP_GetRxCount(PCD_HandleTypeDef const *hpcd, uint8_t ep_addr);
+uint32_t          HAL_PCD_EP_GetRxCount(const PCD_HandleTypeDef *hpcd, uint8_t ep_addr);
 /**
   * @}
   */
@@ -364,7 +363,7 @@ uint32_t          HAL_PCD_EP_GetRxCount(PCD_HandleTypeDef const *hpcd, uint8_t e
 /** @addtogroup PCD_Exported_Functions_Group4 Peripheral State functions
   * @{
   */
-PCD_StateTypeDef HAL_PCD_GetState(PCD_HandleTypeDef const *hpcd);
+PCD_StateTypeDef HAL_PCD_GetState(const PCD_HandleTypeDef *hpcd);
 /**
   * @}
   */

@@ -393,7 +393,7 @@ HAL_StatusTypeDef HAL_DMAEx_ChangeMemory(DMA_HandleTypeDef *hdma, uint32_t Addre
   * @param  pSyncConfig : pointer to HAL_DMA_MuxSyncConfigTypeDef : contains the DMAMUX synchronization parameters
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DMAEx_ConfigMuxSync(DMA_HandleTypeDef *hdma, HAL_DMA_MuxSyncConfigTypeDef *pSyncConfig)
+HAL_StatusTypeDef HAL_DMAEx_ConfigMuxSync(DMA_HandleTypeDef *hdma, const HAL_DMA_MuxSyncConfigTypeDef *pSyncConfig)
 {
   uint32_t syncSignalID = 0;
   uint32_t syncPolarity = 0;
@@ -461,7 +461,7 @@ HAL_StatusTypeDef HAL_DMAEx_ConfigMuxSync(DMA_HandleTypeDef *hdma, HAL_DMA_MuxSy
   *
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_DMAEx_ConfigMuxRequestGenerator (DMA_HandleTypeDef *hdma, HAL_DMA_MuxRequestGeneratorConfigTypeDef *pRequestGeneratorConfig)
+HAL_StatusTypeDef HAL_DMAEx_ConfigMuxRequestGenerator (DMA_HandleTypeDef *hdma, const HAL_DMA_MuxRequestGeneratorConfigTypeDef *pRequestGeneratorConfig)
 {
   HAL_StatusTypeDef status;
   HAL_DMA_StateTypeDef temp_state = hdma->State;

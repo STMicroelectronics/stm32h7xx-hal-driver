@@ -445,6 +445,17 @@ extern "C" {
   * @}
   */
 
+/** @defgroup SYSTEM_LL_EC_PROGRAMMING_DELAY FLASH PROGRAMMING DELAY
+  * @{
+  */
+#define LL_FLASH_PROGRAMMING_DELAY_0   0x00000000U            /*!< programming delay set for Flash running at 70 MHz or below          */
+#define LL_FLASH_PROGRAMMING_DELAY_1   FLASH_ACR_WRHIGHFREQ_0 /*!< programming delay set for Flash running between 70 MHz and 185 MHz  */
+#define LL_FLASH_PROGRAMMING_DELAY_2   FLASH_ACR_WRHIGHFREQ_1 /*!< programming delay set for Flash running between 185 MHz and 225 MHz */
+#define LL_FLASH_PROGRAMMING_DELAY_3   FLASH_ACR_WRHIGHFREQ   /*!< programming delay set for Flash at startup */
+/**
+  * @}
+  */
+
 /**
   * @}
   */
@@ -2482,6 +2493,35 @@ __STATIC_INLINE uint32_t LL_FLASH_GetLatency(void)
 }
 
 /**
+  * @brief  Set FLASH Programming Delay
+  * @rmtoll FLASH_ACR    DELAY       LL_FLASH_SetProgrammingDelay
+  * @param  Delay This parameter can be one of the following values:
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_0
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_1
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_2
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_3
+  * @retval None
+  */
+__STATIC_INLINE void LL_FLASH_SetProgrammingDelay(uint32_t Delay)
+{
+  MODIFY_REG(FLASH->ACR, FLASH_ACR_WRHIGHFREQ, Delay);
+}
+
+/**
+  * @brief  Get FLASH Programming Delay
+  * @rmtoll FLASH_ACR    DELAY       LL_FLASH_GetProgrammingDelay
+  * @retval Returned value can be one of the following values:
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_0
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_1
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_2
+  *         @arg @ref LL_FLASH_PROGRAMMING_DELAY_3
+  */
+__STATIC_INLINE uint32_t LL_FLASH_GetProgrammingDelay(void)
+{
+  return (uint32_t) READ_BIT(FLASH->ACR, FLASH_ACR_WRHIGHFREQ);
+}
+
+/**
   * @}
   */
 
@@ -2567,4 +2607,3 @@ __STATIC_INLINE uint32_t LL_ART_GetBaseAddress(void)
 #endif
 
 #endif /* __STM32H7xx_LL_SYSTEM_H */
-

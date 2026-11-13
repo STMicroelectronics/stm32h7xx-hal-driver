@@ -156,7 +156,8 @@
             HAL_I2C_Master_Seq_Receive_IT() or using HAL_I2C_Master_Seq_Receive_DMA()
       (+++) At reception end of current frame transfer, HAL_I2C_MasterRxCpltCallback() is executed and users can
            add their own code by customization of function pointer HAL_I2C_MasterRxCpltCallback()
-      (++) Abort a master or memory IT or DMA I2C process communication with Interrupt using HAL_I2C_Master_Abort_IT()
+      (++) Abort a master or memory IT or DMA I2C process communication with Interrupt
+           using HAL_I2C_Master_Abort_IT()
       (+++) End of abort process, HAL_I2C_AbortCpltCallback() is executed and users can
            add their own code by customization of function pointer HAL_I2C_AbortCpltCallback()
       (++) Enable/disable the Address listen mode in slave I2C mode using HAL_I2C_EnableListen_IT()
@@ -6011,16 +6012,20 @@ static void I2C_ITAddrCplt(I2C_HandleTypeDef *hi2c, uint32_t ITFlags)
 static void I2C_ITMasterSeqCplt(I2C_HandleTypeDef *hi2c)
 {
   /* Reset I2C handle mode */
-  hi2c->Mode = HAL_I2C_MODE_NONE;
-
+  if (I2C_GET_STOP_MODE(hi2c) == I2C_AUTOEND_MODE)
+  {
+    hi2c->Mode = HAL_I2C_MODE_NONE;
+  }
   /* No Generate Stop, to permit restart mode */
   /* The stop will be done at the end of transfer, when I2C_AUTOEND_MODE enable */
   if (hi2c->State == HAL_I2C_STATE_BUSY_TX)
   {
     hi2c->State         = HAL_I2C_STATE_READY;
     hi2c->PreviousState = I2C_STATE_MASTER_BUSY_TX;
-    hi2c->XferISR       = NULL;
-
+    if (I2C_GET_STOP_MODE(hi2c) == I2C_AUTOEND_MODE)
+    {
+      hi2c->XferISR       = NULL;
+    }
     /* Disable Interrupts */
     I2C_Disable_IRQ(hi2c, I2C_XFER_TX_IT);
 
@@ -6039,7 +6044,10 @@ static void I2C_ITMasterSeqCplt(I2C_HandleTypeDef *hi2c)
   {
     hi2c->State         = HAL_I2C_STATE_READY;
     hi2c->PreviousState = I2C_STATE_MASTER_BUSY_RX;
-    hi2c->XferISR       = NULL;
+    if (I2C_GET_STOP_MODE(hi2c) == I2C_AUTOEND_MODE)
+    {
+      hi2c->XferISR       = NULL;
+    }
 
     /* Disable Interrupts */
     I2C_Disable_IRQ(hi2c, I2C_XFER_RX_IT);

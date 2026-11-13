@@ -809,8 +809,10 @@ void                  HAL_OSPI_IRQHandler(OSPI_HandleTypeDef *hospi);
 /* OSPI command configuration functions */
 HAL_StatusTypeDef     HAL_OSPI_Command(OSPI_HandleTypeDef *hospi, OSPI_RegularCmdTypeDef *cmd, uint32_t Timeout);
 HAL_StatusTypeDef     HAL_OSPI_Command_IT(OSPI_HandleTypeDef *hospi, OSPI_RegularCmdTypeDef *cmd);
-HAL_StatusTypeDef     HAL_OSPI_HyperbusCfg(OSPI_HandleTypeDef *hospi, OSPI_HyperbusCfgTypeDef *cfg, uint32_t Timeout);
-HAL_StatusTypeDef     HAL_OSPI_HyperbusCmd(OSPI_HandleTypeDef *hospi, OSPI_HyperbusCmdTypeDef *cmd, uint32_t Timeout);
+HAL_StatusTypeDef     HAL_OSPI_HyperbusCfg(OSPI_HandleTypeDef *hospi, const OSPI_HyperbusCfgTypeDef *cfg,
+                                           uint32_t Timeout);
+HAL_StatusTypeDef     HAL_OSPI_HyperbusCmd(OSPI_HandleTypeDef *hospi, const OSPI_HyperbusCmdTypeDef *cmd,
+                                           uint32_t Timeout);
 
 /* OSPI indirect mode functions */
 HAL_StatusTypeDef     HAL_OSPI_Transmit(OSPI_HandleTypeDef *hospi, uint8_t *pData, uint32_t Timeout);
@@ -821,11 +823,12 @@ HAL_StatusTypeDef     HAL_OSPI_Transmit_DMA(OSPI_HandleTypeDef *hospi, uint8_t *
 HAL_StatusTypeDef     HAL_OSPI_Receive_DMA(OSPI_HandleTypeDef *hospi, uint8_t *pData);
 
 /* OSPI status flag polling mode functions */
-HAL_StatusTypeDef     HAL_OSPI_AutoPolling(OSPI_HandleTypeDef *hospi, OSPI_AutoPollingTypeDef *cfg, uint32_t Timeout);
-HAL_StatusTypeDef     HAL_OSPI_AutoPolling_IT(OSPI_HandleTypeDef *hospi, OSPI_AutoPollingTypeDef *cfg);
+HAL_StatusTypeDef     HAL_OSPI_AutoPolling(OSPI_HandleTypeDef *hospi, const OSPI_AutoPollingTypeDef *cfg,
+                                           uint32_t Timeout);
+HAL_StatusTypeDef     HAL_OSPI_AutoPolling_IT(OSPI_HandleTypeDef *hospi, const OSPI_AutoPollingTypeDef *cfg);
 
 /* OSPI memory-mapped mode functions */
-HAL_StatusTypeDef     HAL_OSPI_MemoryMapped(OSPI_HandleTypeDef *hospi, OSPI_MemoryMappedTypeDef *cfg);
+HAL_StatusTypeDef     HAL_OSPI_MemoryMapped(OSPI_HandleTypeDef *hospi, const OSPI_MemoryMappedTypeDef *cfg);
 uint32_t              HAL_OSPI_IsMemoryMapped(const OSPI_HandleTypeDef *hospi);
 
 /* Callback functions in non-blocking modes ***********************************/

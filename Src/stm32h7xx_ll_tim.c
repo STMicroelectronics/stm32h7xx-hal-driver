@@ -698,7 +698,7 @@ ErrorStatus LL_TIM_HALLSENSOR_Init(TIM_TypeDef *TIMx, const LL_TIM_HALLSENSOR_In
   /* Set Channel 1 polarity and enable Channel 1 and Channel2 */
   tmpccer &= (uint32_t)~(TIM_CCER_CC1P | TIM_CCER_CC1NP | TIM_CCER_CC2P | TIM_CCER_CC2NP);
   tmpccer |= (uint32_t)(TIM_HallSensorInitStruct->IC1Polarity);
-  tmpccer |= (uint32_t)(TIM_CCER_CC1E | TIM_CCER_CC2E);
+  tmpccer |= (uint32_t)(TIM_CCER_CC1E);
 
   /* Write to TIMx CR2 */
   LL_TIM_WriteReg(TIMx, CR2, tmpcr2);

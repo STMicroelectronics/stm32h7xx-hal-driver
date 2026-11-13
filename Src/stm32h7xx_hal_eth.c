@@ -1239,8 +1239,8 @@ static void ETH_UpdateDescriptor(ETH_HandleTypeDef *heth)
     /* Set the tail pointer index */
     tailidx = (ETH_RX_DESC_CNT + descidx - 1U) % ETH_RX_DESC_CNT;
 
-    /* DMB instruction to avoid race condition */
-    __DMB();
+    /* DSB instruction to avoid race condition */
+    __DSB();
 
     /* Set the Tail pointer address */
     WRITE_REG(heth->Instance->DMACRDTPR, ((uint32_t)(heth->Init.RxDesc + (tailidx))));
@@ -1802,7 +1802,7 @@ static HAL_StatusTypeDef HAL_ETH_PTP_AddendUpdate(const ETH_HandleTypeDef *heth,
   */
 HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(const ETH_HandleTypeDef *heth)
 {
-  ETH_TxDescListTypeDef *dmatxdesclist = &heth->TxDescList;
+  const ETH_TxDescListTypeDef *dmatxdesclist = &heth->TxDescList;
   uint32_t descidx = dmatxdesclist->CurTxDesc;
   ETH_DMADescTypeDef *dmatxdesc = (ETH_DMADescTypeDef *)dmatxdesclist->TxDesc[descidx];
 
@@ -1831,7 +1831,7 @@ HAL_StatusTypeDef HAL_ETH_PTP_InsertTxTimestamp(const ETH_HandleTypeDef *heth)
   */
 HAL_StatusTypeDef HAL_ETH_PTP_GetTxTimestamp(const ETH_HandleTypeDef *heth, ETH_TimeStampTypeDef *timestamp)
 {
-  ETH_TxDescListTypeDef *dmatxdesclist = &heth->TxDescList;
+  const ETH_TxDescListTypeDef *dmatxdesclist = &heth->TxDescList;
   uint32_t idx =       dmatxdesclist->releaseIndex;
   ETH_DMADescTypeDef *dmatxdesc = (ETH_DMADescTypeDef *)dmatxdesclist->TxDesc[idx];
 
@@ -3081,12 +3081,20 @@ static void ETH_DMATxDescListInit(ETH_HandleTypeDef *heth)
     WRITE_REG(dmatxdesc->DESC1, 0x0U);
     WRITE_REG(dmatxdesc->DESC2, 0x0U);
     WRITE_REG(dmatxdesc->DESC3, 0x0U);
+    WRITE_REG(dmatxdesc->BackupAddr0, 0x0U);
+    WRITE_REG(dmatxdesc->BackupAddr1, 0x0U);
 
     WRITE_REG(heth->TxDescList.TxDesc[i], (uint32_t)dmatxdesc);
+
+    /* Clear the entry in the in-use array.  */
+    heth->TxDescList.PacketAddress[i] = NULL;
 
   }
 
   heth->TxDescList.CurTxDesc = 0;
+  heth->TxDescList.CurrentPacketAddress = NULL;
+  heth->TxDescList.BuffersInUse = 0;
+  heth->TxDescList.releaseIndex = 0;
 
   /* Set Transmit Descriptor Ring Length */
   WRITE_REG(heth->Instance->DMACTDRLR, (ETH_TX_DESC_CNT - 1U));
@@ -3128,9 +3136,17 @@ static void ETH_DMARxDescListInit(ETH_HandleTypeDef *heth)
 
   WRITE_REG(heth->RxDescList.RxDescIdx, 0U);
   WRITE_REG(heth->RxDescList.RxDescCnt, 0U);
+  WRITE_REG(heth->RxDescList.RxDataLength, 0U);
   WRITE_REG(heth->RxDescList.RxBuildDescIdx, 0U);
   WRITE_REG(heth->RxDescList.RxBuildDescCnt, 0U);
   WRITE_REG(heth->RxDescList.ItMode, 0U);
+  WRITE_REG(heth->RxDescList.pRxLastRxDesc, 0U);
+  heth->RxDescList.pRxStart = NULL;
+  heth->RxDescList.pRxEnd   = NULL;
+
+  /* Initialize timestamp to an invalid value */
+  heth->RxDescList.TimeStamp.TimeStampHigh = UINT32_MAX;
+  heth->RxDescList.TimeStamp.TimeStampLow  = UINT32_MAX;
 
   /* Set Receive Descriptor Ring Length */
   WRITE_REG(heth->Instance->DMACRDRLR, ((uint32_t)(ETH_RX_DESC_CNT - 1U)));

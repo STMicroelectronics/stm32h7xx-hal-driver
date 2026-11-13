@@ -139,7 +139,7 @@ extern "C" {
 #define COMP_EXTI_LINE_COMP6_EVENT     COMP_EXTI_LINE_COMP6
 #define COMP_EXTI_LINE_COMP7_EVENT     COMP_EXTI_LINE_COMP7
 #if defined(STM32L0)
-#define COMP_LPTIMCONNECTION_ENABLED   ((uint32_t)0x00000003U)    /*!< COMPX output generic naming: connected to LPTIM 
+#define COMP_LPTIMCONNECTION_ENABLED   ((uint32_t)0x00000003U)    /*!< COMPX output generic naming: connected to LPTIM
                                                                        input 1 for COMP1, LPTIM input 2 for COMP2 */
 #endif
 #define COMP_OUTPUT_COMP6TIM2OCREFCLR  COMP_OUTPUT_COMP6_TIM2OCREFCLR
@@ -241,9 +241,9 @@ extern "C" {
   */
 #if defined(STM32H5) || defined(STM32C0)
 #else
-#define HAL_CRC_Input_Data_Reverse   HAL_CRCEx_Input_Data_Reverse    /*!< Aliased to HAL_CRCEx_Input_Data_Reverse for 
+#define HAL_CRC_Input_Data_Reverse   HAL_CRCEx_Input_Data_Reverse    /*!< Aliased to HAL_CRCEx_Input_Data_Reverse for
                                                                           inter STM32 series compatibility  */
-#define HAL_CRC_Output_Data_Reverse  HAL_CRCEx_Output_Data_Reverse   /*!< Aliased to HAL_CRCEx_Output_Data_Reverse for 
+#define HAL_CRC_Output_Data_Reverse  HAL_CRCEx_Output_Data_Reverse   /*!< Aliased to HAL_CRCEx_Output_Data_Reverse for
                                                                           inter STM32 series compatibility */
 #endif
 /**
@@ -474,7 +474,7 @@ extern "C" {
 #define TYPEPROGRAMDATA_FASTBYTE      FLASH_TYPEPROGRAMDATA_FASTBYTE
 #define TYPEPROGRAMDATA_FASTHALFWORD  FLASH_TYPEPROGRAMDATA_FASTHALFWORD
 #define TYPEPROGRAMDATA_FASTWORD      FLASH_TYPEPROGRAMDATA_FASTWORD
-#if !defined(STM32F2) && !defined(STM32F4) && !defined(STM32F7) && !defined(STM32H7) && !defined(STM32H5) 
+#if !defined(STM32F2) && !defined(STM32F4) && !defined(STM32F7) && !defined(STM32H7) && !defined(STM32H5)
 #define PAGESIZE                      FLASH_PAGE_SIZE
 #endif /* STM32F2 && STM32F4 && STM32F7 &&  STM32H7 && STM32H5 */
 #define TYPEPROGRAM_FASTBYTE          FLASH_TYPEPROGRAM_BYTE
@@ -1306,7 +1306,7 @@ extern "C" {
 #if defined(STM32H5) || defined(STM32WBA) || defined(STM32H7RS) || defined(STM32N6)
 #define TAMP_SECRETDEVICE_ERASE_DISABLE     TAMP_DEVICESECRETS_ERASE_NONE
 #define TAMP_SECRETDEVICE_ERASE_ENABLE      TAMP_SECRETDEVICE_ERASE_ALL
-#endif /* STM32H5 || STM32WBA || STM32H7RS ||  STM32N6 */
+#endif /* STM32H5 || STM32WBA || STM32H7RS || STM32N6 */
 
 #if defined(STM32F7) || defined(STM32WB)
 #define RTC_TAMPCR_TAMPXE          RTC_TAMPER_ENABLE_BITS_MASK
@@ -1607,35 +1607,35 @@ extern "C" {
 #define ETH_MAC_TXFIFONOT_EMPTY                       0x01000000U  /* Tx FIFO not empty */
 #define ETH_MAC_TXFIFO_WRITE_ACTIVE                   0x00400000U  /* Tx FIFO write active */
 #define ETH_MAC_TXFIFO_IDLE                           0x00000000U  /* Tx FIFO read status: Idle */
-#define ETH_MAC_TXFIFO_READ                           0x00100000U  /* Tx FIFO read status: Read (transferring data to 
+#define ETH_MAC_TXFIFO_READ                           0x00100000U  /* Tx FIFO read status: Read (transferring data to
                                                                       the MAC transmitter) */
-#define ETH_MAC_TXFIFO_WAITING                        0x00200000U  /* Tx FIFO read status: Waiting for TxStatus from 
+#define ETH_MAC_TXFIFO_WAITING                        0x00200000U  /* Tx FIFO read status: Waiting for TxStatus from
                                                                       MAC transmitter */
 #define ETH_MAC_TXFIFO_WRITING                        0x00300000U  /* Tx FIFO read status: Writing the received TxStatus
                                                                       or flushing the TxFIFO */
 #define ETH_MAC_TRANSMISSION_PAUSE                    0x00080000U  /* MAC transmitter in pause */
 #define ETH_MAC_TRANSMITFRAMECONTROLLER_IDLE          0x00000000U  /* MAC transmit frame controller: Idle */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_WAITING       0x00020000U  /* MAC transmit frame controller: Waiting for Status 
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_WAITING       0x00020000U  /* MAC transmit frame controller: Waiting for Status
                                                                    of previous frame or IFG/backoff period to be over */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_GENRATING_PCF 0x00040000U  /* MAC transmit frame controller: Generating and 
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_GENRATING_PCF 0x00040000U  /* MAC transmit frame controller: Generating and
                                                              transmitting a Pause control frame (in full duplex mode) */
-#define ETH_MAC_TRANSMITFRAMECONTROLLER_TRANSFERRING  0x00060000U  /* MAC transmit frame controller: Transferring input 
+#define ETH_MAC_TRANSMITFRAMECONTROLLER_TRANSFERRING  0x00060000U  /* MAC transmit frame controller: Transferring input
                                                                       frame for transmission */
 #define ETH_MAC_MII_TRANSMIT_ACTIVE           0x00010000U  /* MAC MII transmit engine active */
 #define ETH_MAC_RXFIFO_EMPTY                  0x00000000U  /* Rx FIFO fill level: empty */
-#define ETH_MAC_RXFIFO_BELOW_THRESHOLD        0x00000100U  /* Rx FIFO fill level: fill-level below flow-control 
+#define ETH_MAC_RXFIFO_BELOW_THRESHOLD        0x00000100U  /* Rx FIFO fill level: fill-level below flow-control
                                                               de-activate threshold */
-#define ETH_MAC_RXFIFO_ABOVE_THRESHOLD        0x00000200U  /* Rx FIFO fill level: fill-level above flow-control 
+#define ETH_MAC_RXFIFO_ABOVE_THRESHOLD        0x00000200U  /* Rx FIFO fill level: fill-level above flow-control
                                                               activate threshold */
 #define ETH_MAC_RXFIFO_FULL                   0x00000300U  /* Rx FIFO fill level: full */
 #if defined(STM32F1)
 #else
 #define ETH_MAC_READCONTROLLER_IDLE           0x00000000U  /* Rx FIFO read controller IDLE state */
 #define ETH_MAC_READCONTROLLER_READING_DATA   0x00000020U  /* Rx FIFO read controller Reading frame data */
-#define ETH_MAC_READCONTROLLER_READING_STATUS 0x00000040U  /* Rx FIFO read controller Reading frame status 
+#define ETH_MAC_READCONTROLLER_READING_STATUS 0x00000040U  /* Rx FIFO read controller Reading frame status
                                                              (or time-stamp) */
 #endif
-#define ETH_MAC_READCONTROLLER_FLUSHING       0x00000060U  /* Rx FIFO read controller Flushing the frame data and 
+#define ETH_MAC_READCONTROLLER_FLUSHING       0x00000060U  /* Rx FIFO read controller Flushing the frame data and
                                                               status */
 #define ETH_MAC_RXFIFO_WRITE_ACTIVE           0x00000010U  /* Rx FIFO write controller active */
 #define ETH_MAC_SMALL_FIFO_NOTACTIVE          0x00000000U  /* MAC small FIFO read / write controllers not active */
@@ -1917,7 +1917,11 @@ extern "C" {
 #define HAL_PWREx_DisableSDADCAnalog                  HAL_PWREx_DisableSDADC
 #define HAL_PWREx_EnableSDADCAnalog                   HAL_PWREx_EnableSDADC
 #define HAL_PWREx_PVMConfig                           HAL_PWREx_ConfigPVM
-
+#if defined(STM32G0C1xx) || defined(STM32G0B1xx)
+#define PWR_PVM_USB                                   PWR_PVM_ENABLE
+#define PWR_FLAG_PVMOUSB                              PWR_FLAG_PVMOVDDIO2
+#define PWR_FLAG_PVMO_USB                             PWR_FLAG_PVMO_VDDIO2
+#endif /* STM32G0C1xx || STM32G0B1xx */
 #define PWR_MODE_NORMAL                               PWR_PVD_MODE_NORMAL
 #define PWR_MODE_IT_RISING                            PWR_PVD_MODE_IT_RISING
 #define PWR_MODE_IT_FALLING                           PWR_PVD_MODE_IT_FALLING
@@ -2161,6 +2165,13 @@ extern "C" {
 #define HAL_GetFMCMemorySwappingConfig        HAL_FMC_GetBankSwapConfig
 #endif /* STM32H7RS || STM32N6 */
 
+#if defined(STM32N6)
+/* alias CMSIS */
+#define CSI_PCR_PWRDOWN_Pos             CSI_PCR_NPWRDOWN_Pos
+#define CSI_PCR_PWRDOWN_Msk             CSI_PCR_NPWRDOWN_Msk
+#define CSI_PCR_PWRDOWN                 CSI_PCR_NPWRDOWN
+#endif /* STM32N6 */
+
 /**
   * @}
   */
@@ -2245,6 +2256,15 @@ extern "C" {
 #define __HAL_ADC_CFGR1_OVERRUN                          ADC_CFGR1_OVERRUN
 #define __HAL_ADC_CFGR1_SCANDIR                          ADC_CFGR1_SCANDIR
 #define __HAL_ADC_CFGR1_DMACONTREQ                       ADC_CFGR1_DMACONTREQ
+
+#if defined (STM32L031xx) || defined (STM32L041xx) || \
+    defined (STM32L051xx) || defined (STM32L052xx) || defined (STM32L053xx) || \
+    defined (STM32L062xx) || defined (STM32L063xx) || \
+    defined (STM32L071xx) || defined (STM32L072xx) || defined (STM32L073xx) || \
+    defined (STM32L081xx) || defined (STM32L082xx) || defined (STM32L083xx) || \
+    defined (STM32L010x6) || defined (STM32L010x8) || defined (STM32L010xB)
+#define ADC_EXTERNALTRIGCONV_T21_TRGO           (ADC_EXTERNALTRIGCONV_T22_TRGO)
+#endif
 
 /**
   * @}
@@ -2515,9 +2535,9 @@ extern "C" {
 /** @defgroup HAL_COMP_Aliased_Functions HAL COMP Aliased Functions maintained for legacy purpose
   * @{
   */
-#define HAL_COMP_Start_IT       HAL_COMP_Start /* Function considered as legacy as EXTI event or IT configuration is 
+#define HAL_COMP_Start_IT       HAL_COMP_Start /* Function considered as legacy as EXTI event or IT configuration is
                                                   done into HAL_COMP_Init() */
-#define HAL_COMP_Stop_IT        HAL_COMP_Stop  /* Function considered as legacy as EXTI event or IT configuration is 
+#define HAL_COMP_Stop_IT        HAL_COMP_Stop  /* Function considered as legacy as EXTI event or IT configuration is
                                                   done into HAL_COMP_Init() */
 /**
   * @}
@@ -3687,7 +3707,11 @@ extern "C" {
 #define RCC_PLLDIV_4                RCC_PLL_DIV4
 
 #define IS_RCC_MCOSOURCE            IS_RCC_MCO1SOURCE
+#define RCC_MCOSOURCE_SYSCLK        RCC_MCO1SOURCE_SYSCLK
+#define RCC_MCOSOURCE_HSE           RCC_MCO1SOURCE_HSE
 #define __HAL_RCC_MCO_CONFIG        __HAL_RCC_MCO1_CONFIG
+
+
 #define RCC_MCO_NODIV               RCC_MCODIV_1
 #define RCC_MCO_DIV1                RCC_MCODIV_1
 #define RCC_MCO_DIV2                RCC_MCODIV_2
@@ -3700,17 +3724,20 @@ extern "C" {
 #define RCC_MCOSOURCE_NONE          RCC_MCO1SOURCE_NOCLOCK
 #define RCC_MCOSOURCE_LSI           RCC_MCO1SOURCE_LSI
 #define RCC_MCOSOURCE_LSE           RCC_MCO1SOURCE_LSE
-#define RCC_MCOSOURCE_SYSCLK        RCC_MCO1SOURCE_SYSCLK
 #define RCC_MCOSOURCE_HSI           RCC_MCO1SOURCE_HSI
 #define RCC_MCOSOURCE_HSI14         RCC_MCO1SOURCE_HSI14
 #define RCC_MCOSOURCE_HSI48         RCC_MCO1SOURCE_HSI48
-#define RCC_MCOSOURCE_HSE           RCC_MCO1SOURCE_HSE
 #define RCC_MCOSOURCE_PLLCLK_DIV1   RCC_MCO1SOURCE_PLLCLK
 #define RCC_MCOSOURCE_PLLCLK_NODIV  RCC_MCO1SOURCE_PLLCLK
 #define RCC_MCOSOURCE_PLLCLK_DIV2   RCC_MCO1SOURCE_PLLCLK_DIV2
 
 #if defined(STM32U0)
 #define RCC_SYSCLKSOURCE_STATUS_PLLR   RCC_SYSCLKSOURCE_STATUS_PLLCLK
+#endif
+
+#if defined(STM32C0)
+#define RCC_LSEDRIVE_LOW            RCC_LSEDRIVE_MEDIUMHIGH
+#define RCC_LSEDRIVE_MEDIUMLOW      RCC_LSEDRIVE_MEDIUMHIGH
 #endif
 
 #if defined(STM32L4) || defined(STM32WB) || defined(STM32G0) || defined(STM32G4) || defined(STM32L5) ||  defined(STM32WL) || defined(STM32C0) || defined(STM32N6) || defined(STM32H7RS) ||  defined(STM32U0)
@@ -3962,7 +3989,7 @@ extern "C" {
 /** @defgroup HAL_RTC_Aliased_Macros HAL RTC Aliased Macros maintained for legacy purpose
   * @{
   */
-#if defined (STM32G0) || defined (STM32L5) || defined (STM32L412xx) || defined (STM32L422xx) ||  defined (STM32L4P5xx)|| defined (STM32L4Q5xx) || defined (STM32G4) || defined (STM32WL) || defined (STM32U5) || defined (STM32WBA) || defined (STM32H5) ||  defined (STM32C0) || defined (STM32N6) || defined (STM32H7RS) || defined (STM32U0) || defined (STM32U3)
+#if defined (STM32G0) || defined (STM32L5) || defined (STM32L412xx) || defined (STM32L422xx) || defined (STM32L4P5xx)|| defined (STM32L4Q5xx) || defined (STM32G4) || defined (STM32WL) || defined (STM32U5) || defined (STM32WBA) || defined (STM32H5) || defined (STM32C0) || defined (STM32N6) || defined (STM32H7RS) || defined (STM32U0) || defined (STM32U3)
 #else
 #define __HAL_RTC_CLEAR_FLAG                      __HAL_RTC_EXTI_CLEAR_FLAG
 #endif

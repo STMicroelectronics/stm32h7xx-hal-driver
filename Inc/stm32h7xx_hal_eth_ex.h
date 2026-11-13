@@ -22,7 +22,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif /* __cplusplus */
 
 #if defined(ETH)
 
@@ -362,6 +362,6 @@ uint32_t          HAL_ETHEx_GetMACLPIEvent(const ETH_HandleTypeDef *heth);
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
 #endif /* STM32H7xx_HAL_ETH_EX_H */

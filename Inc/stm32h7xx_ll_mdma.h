@@ -4327,7 +4327,7 @@ __STATIC_INLINE uint32_t LL_MDMA_IsEnabledIT_TC(const MDMA_TypeDef *MDMAx, uint3
 uint32_t LL_MDMA_Init(MDMA_TypeDef *MDMAx, uint32_t Channel, LL_MDMA_InitTypeDef *MDMA_InitStruct);
 uint32_t LL_MDMA_DeInit(MDMA_TypeDef *MDMAx, uint32_t Channel);
 void LL_MDMA_StructInit(LL_MDMA_InitTypeDef *MDMA_InitStruct);
-void LL_MDMA_CreateLinkNode(LL_MDMA_InitTypeDef *MDMA_InitStruct, LL_MDMA_LinkNodeTypeDef *pNode);
+void LL_MDMA_CreateLinkNode(const LL_MDMA_InitTypeDef *MDMA_InitStruct, LL_MDMA_LinkNodeTypeDef *pNode);
 void LL_MDMA_ConnectLinkNode(LL_MDMA_LinkNodeTypeDef *pPrevLinkNode, LL_MDMA_LinkNodeTypeDef *pNewLinkNode);
 void LL_MDMA_DisconnectNextLinkNode(LL_MDMA_LinkNodeTypeDef *pLinkNode);
 

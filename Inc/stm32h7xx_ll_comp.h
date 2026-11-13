@@ -910,7 +910,7 @@ __STATIC_INLINE uint32_t LL_COMP_IsEnabledIT_OutputTrig(const COMP_TypeDef *COMP
   */
 
 ErrorStatus LL_COMP_DeInit(COMP_TypeDef *COMPx);
-ErrorStatus LL_COMP_Init(COMP_TypeDef *COMPx, LL_COMP_InitTypeDef *COMP_InitStruct);
+ErrorStatus LL_COMP_Init(COMP_TypeDef *COMPx, const LL_COMP_InitTypeDef *COMP_InitStruct);
 void        LL_COMP_StructInit(LL_COMP_InitTypeDef *COMP_InitStruct);
 
 /**

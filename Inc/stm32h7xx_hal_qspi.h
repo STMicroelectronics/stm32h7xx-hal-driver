@@ -157,7 +157,7 @@ typedef struct
   uint32_t DdrMode;            /* Specifies the double data rate mode for address, alternate byte and data phase
                                   This parameter can be a value of @ref QSPI_DdrMode */
   uint32_t DdrHoldHalfCycle;   /* Specifies if the DDR hold is enabled. When enabled it delays the data
-                                  output by one half of system clock in DDR mode.
+                                  output by one quarter of QUADSPI output clock in DDR mode.
                                   This parameter can be a value of @ref QSPI_DdrHoldHalfCycle */
   uint32_t SIOOMode;           /* Specifies the send instruction only once mode
                                   This parameter can be a value of @ref QSPI_SIOOMode */
@@ -371,7 +371,7 @@ typedef void (*pQSPI_CallbackTypeDef)(QSPI_HandleTypeDef *hqspi);
   * @{
   */
 #define QSPI_DDR_HHC_ANALOG_DELAY      0x00000000U                  /*!<Delay the data output using analog delay in DDR mode*/
-#define QSPI_DDR_HHC_HALF_CLK_DELAY    ((uint32_t)QUADSPI_CCR_DHHC) /*!<Delay the data output by one half of system clock in DDR mode*/
+#define QSPI_DDR_HHC_HALF_CLK_DELAY    ((uint32_t)QUADSPI_CCR_DHHC) /*!<Delay the data output by one quarter of QUADSPI output clock in DDR mode*/
 /**
   * @}
   */
@@ -596,11 +596,11 @@ HAL_StatusTypeDef     HAL_QSPI_Transmit_DMA (QSPI_HandleTypeDef *hqspi, uint8_t 
 HAL_StatusTypeDef     HAL_QSPI_Receive_DMA  (QSPI_HandleTypeDef *hqspi, uint8_t *pData);
 
 /* QSPI status flag polling mode */
-HAL_StatusTypeDef     HAL_QSPI_AutoPolling   (QSPI_HandleTypeDef *hqspi, QSPI_CommandTypeDef *cmd, QSPI_AutoPollingTypeDef *cfg, uint32_t Timeout);
-HAL_StatusTypeDef     HAL_QSPI_AutoPolling_IT(QSPI_HandleTypeDef *hqspi, QSPI_CommandTypeDef *cmd, QSPI_AutoPollingTypeDef *cfg);
+HAL_StatusTypeDef     HAL_QSPI_AutoPolling   (QSPI_HandleTypeDef *hqspi, QSPI_CommandTypeDef *cmd, QSPI_AutoPollingTypeDef const *cfg, uint32_t Timeout);
+HAL_StatusTypeDef     HAL_QSPI_AutoPolling_IT(QSPI_HandleTypeDef *hqspi, QSPI_CommandTypeDef *cmd, QSPI_AutoPollingTypeDef const *cfg);
 
 /* QSPI memory-mapped mode */
-HAL_StatusTypeDef     HAL_QSPI_MemoryMapped(QSPI_HandleTypeDef *hqspi, QSPI_CommandTypeDef *cmd, QSPI_MemoryMappedTypeDef *cfg);
+HAL_StatusTypeDef     HAL_QSPI_MemoryMapped(QSPI_HandleTypeDef *hqspi, QSPI_CommandTypeDef *cmd, QSPI_MemoryMappedTypeDef const *cfg);
 
 /* Callback functions in non-blocking modes ***********************************/
 void                  HAL_QSPI_ErrorCallback        (QSPI_HandleTypeDef *hqspi);

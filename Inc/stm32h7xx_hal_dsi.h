@@ -1131,7 +1131,7 @@ typedef  void (*pDSI_CallbackTypeDef)(DSI_HandleTypeDef *hdsi);  /*!< pointer to
   *  @brief   Initialization and Configuration functions
   * @{
   */
-HAL_StatusTypeDef HAL_DSI_Init(DSI_HandleTypeDef *hdsi, DSI_PLLInitTypeDef *PLLInit);
+HAL_StatusTypeDef HAL_DSI_Init(DSI_HandleTypeDef *hdsi, const DSI_PLLInitTypeDef *PLLInit);
 HAL_StatusTypeDef HAL_DSI_DeInit(DSI_HandleTypeDef *hdsi);
 void HAL_DSI_MspInit(DSI_HandleTypeDef *hdsi);
 void HAL_DSI_MspDeInit(DSI_HandleTypeDef *hdsi);
@@ -1163,12 +1163,12 @@ void HAL_DSI_ErrorCallback(DSI_HandleTypeDef *hdsi);
   * @{
   */
 HAL_StatusTypeDef HAL_DSI_SetGenericVCID(DSI_HandleTypeDef *hdsi, uint32_t VirtualChannelID);
-HAL_StatusTypeDef HAL_DSI_ConfigVideoMode(DSI_HandleTypeDef *hdsi, DSI_VidCfgTypeDef *VidCfg);
-HAL_StatusTypeDef HAL_DSI_ConfigAdaptedCommandMode(DSI_HandleTypeDef *hdsi, DSI_CmdCfgTypeDef *CmdCfg);
-HAL_StatusTypeDef HAL_DSI_ConfigCommand(DSI_HandleTypeDef *hdsi, DSI_LPCmdTypeDef *LPCmd);
+HAL_StatusTypeDef HAL_DSI_ConfigVideoMode(DSI_HandleTypeDef *hdsi, const DSI_VidCfgTypeDef *VidCfg);
+HAL_StatusTypeDef HAL_DSI_ConfigAdaptedCommandMode(DSI_HandleTypeDef *hdsi, const DSI_CmdCfgTypeDef *CmdCfg);
+HAL_StatusTypeDef HAL_DSI_ConfigCommand(DSI_HandleTypeDef *hdsi, const DSI_LPCmdTypeDef *LPCmd);
 HAL_StatusTypeDef HAL_DSI_ConfigFlowControl(DSI_HandleTypeDef *hdsi, uint32_t FlowControl);
-HAL_StatusTypeDef HAL_DSI_ConfigPhyTimer(DSI_HandleTypeDef *hdsi, DSI_PHY_TimerTypeDef *PhyTimers);
-HAL_StatusTypeDef HAL_DSI_ConfigHostTimeouts(DSI_HandleTypeDef *hdsi, DSI_HOST_TimeoutTypeDef *HostTimeouts);
+HAL_StatusTypeDef HAL_DSI_ConfigPhyTimer(DSI_HandleTypeDef *hdsi, const DSI_PHY_TimerTypeDef *PhyTimers);
+HAL_StatusTypeDef HAL_DSI_ConfigHostTimeouts(DSI_HandleTypeDef *hdsi, const DSI_HOST_TimeoutTypeDef *HostTimeouts);
 HAL_StatusTypeDef HAL_DSI_Start(DSI_HandleTypeDef *hdsi);
 HAL_StatusTypeDef HAL_DSI_Stop(DSI_HandleTypeDef *hdsi);
 HAL_StatusTypeDef HAL_DSI_Refresh(DSI_HandleTypeDef *hdsi);

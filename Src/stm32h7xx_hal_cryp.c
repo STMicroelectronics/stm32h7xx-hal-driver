@@ -2917,7 +2917,7 @@ static void CRYP_CopyPartialOutputWord(uint32_t *pOutputWord, uint32_t word, uin
 
   for (index = 0U; index < 4U; index++)
   {
-    if ((maskValue & (0xFFU << (index * 8U))) != 0U)
+    if ((maskValue & (0xFFUL << (index * 8U))) != 0U)
     {
       pDst[dstIndex] = pSrc[index];
       dstIndex++;
@@ -3792,8 +3792,8 @@ static HAL_StatusTypeDef CRYP_AESCCM_Process(CRYP_HandleTypeDef *hcryp, uint32_t
         tmp =  *(uint32_t *)(hcryp->pCrypInBuffPtr + hcryp->CrypInCount);
         tmp &= mask[((hcryp->Init.DataType >> 5) * 2U) + ((16U - npblb) % 4U)];
         hcryp->Instance->DIN = tmp;
+        hcryp->CrypInCount++;
         index++;
-        lastwordsize = ((16U - npblb) / 4U) + 1U;
       }
 
       /* Pad the data with zeros to have a complete block */

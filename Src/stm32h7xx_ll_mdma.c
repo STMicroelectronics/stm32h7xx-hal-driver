@@ -635,7 +635,7 @@ void LL_MDMA_StructInit(LL_MDMA_InitTypeDef *MDMA_InitStruct)
   * @param  pNode Pointer to linked list node to fill according to MDMA_InitStruct parameters.
   * @retval None
   */
-void LL_MDMA_CreateLinkNode(LL_MDMA_InitTypeDef *MDMA_InitStruct, LL_MDMA_LinkNodeTypeDef *pNode)
+void LL_MDMA_CreateLinkNode(const LL_MDMA_InitTypeDef *MDMA_InitStruct, LL_MDMA_LinkNodeTypeDef *pNode)
 {
 
   /* Check the MDMA parameters from MDMA_InitStruct */

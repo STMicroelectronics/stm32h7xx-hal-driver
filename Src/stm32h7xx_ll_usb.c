@@ -253,39 +253,32 @@ HAL_StatusTypeDef USB_DisableGlobalInt(USB_OTG_GlobalTypeDef *USBx)
   */
 HAL_StatusTypeDef USB_SetCurrentMode(USB_OTG_GlobalTypeDef *USBx, USB_OTG_ModeTypeDef mode)
 {
-  uint32_t ms = 0U;
+  __IO uint32_t count = 0U;
 
   USBx->GUSBCFG &= ~(USB_OTG_GUSBCFG_FHMOD | USB_OTG_GUSBCFG_FDMOD);
 
   if (mode == USB_HOST_MODE)
   {
     USBx->GUSBCFG |= USB_OTG_GUSBCFG_FHMOD;
-
-    do
-    {
-      HAL_Delay(10U);
-      ms += 10U;
-    } while ((USB_GetMode(USBx) != (uint32_t)USB_HOST_MODE) && (ms < HAL_USB_CURRENT_MODE_MAX_DELAY_MS));
   }
   else if (mode == USB_DEVICE_MODE)
   {
     USBx->GUSBCFG |= USB_OTG_GUSBCFG_FDMOD;
-
-    do
-    {
-      HAL_Delay(10U);
-      ms += 10U;
-    } while ((USB_GetMode(USBx) != (uint32_t)USB_DEVICE_MODE) && (ms < HAL_USB_CURRENT_MODE_MAX_DELAY_MS));
   }
   else
   {
     return HAL_ERROR;
   }
 
-  if (ms == HAL_USB_CURRENT_MODE_MAX_DELAY_MS)
+  do
   {
-    return HAL_ERROR;
-  }
+    count++;
+
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_CURRENT_MODE_MAX_DELAY_MS))
+    {
+      return HAL_ERROR;
+    }
+  } while (USB_GetMode(USBx) != (uint32_t)mode);
 
   return HAL_OK;
 }
@@ -332,6 +325,9 @@ HAL_StatusTypeDef USB_DevInit(USB_OTG_GlobalTypeDef *USBx, USB_OTG_CfgTypeDef cf
 
   if (cfg.phy_itface == USB_OTG_ULPI_PHY)
   {
+    /* Enable delay for some ULPI PHYs that improves chirp timing */
+    USBx_DEVICE->DCFG |= (0x1UL << 14);
+
     if (cfg.speed == USBD_HS_SPEED)
     {
       /* Set Core speed to High speed mode */
@@ -459,7 +455,7 @@ HAL_StatusTypeDef USB_FlushTxFifo(USB_OTG_GlobalTypeDef *USBx, uint32_t num)
   {
     count++;
 
-    if (count > HAL_USB_TIMEOUT)
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
     {
       return HAL_TIMEOUT;
     }
@@ -473,7 +469,7 @@ HAL_StatusTypeDef USB_FlushTxFifo(USB_OTG_GlobalTypeDef *USBx, uint32_t num)
   {
     count++;
 
-    if (count > HAL_USB_TIMEOUT)
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
     {
       return HAL_TIMEOUT;
     }
@@ -496,7 +492,7 @@ HAL_StatusTypeDef USB_FlushRxFifo(USB_OTG_GlobalTypeDef *USBx)
   {
     count++;
 
-    if (count > HAL_USB_TIMEOUT)
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
     {
       return HAL_TIMEOUT;
     }
@@ -510,7 +506,7 @@ HAL_StatusTypeDef USB_FlushRxFifo(USB_OTG_GlobalTypeDef *USBx)
   {
     count++;
 
-    if (count > HAL_USB_TIMEOUT)
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
     {
       return HAL_TIMEOUT;
     }
@@ -935,7 +931,7 @@ HAL_StatusTypeDef USB_EPStopXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_EPTypeDef 
       {
         count++;
 
-        if (count > 0xF0000U)
+        if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
         {
           ret = HAL_ERROR;
           break;
@@ -958,7 +954,7 @@ HAL_StatusTypeDef USB_EPStopXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_EPTypeDef 
       {
         count++;
 
-        if (count > 0xF0000U)
+        if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
         {
           ret = HAL_ERROR;
           break;
@@ -977,7 +973,7 @@ HAL_StatusTypeDef USB_EPStopXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_EPTypeDef 
     {
       count++;
 
-      if (count > 0xF0000U)
+      if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
       {
         ret = HAL_ERROR;
         break;
@@ -995,7 +991,7 @@ HAL_StatusTypeDef USB_EPStopXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_EPTypeDef 
     {
       count++;
 
-      if (count > 0xF0000U)
+      if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
       {
         ret = HAL_ERROR;
         break;
@@ -1250,7 +1246,7 @@ HAL_StatusTypeDef USB_DevDisconnect(const USB_OTG_GlobalTypeDef *USBx)
   * @param  USBx  Selected device
   * @retval USB Global Interrupt status
   */
-uint32_t USB_ReadInterrupts(USB_OTG_GlobalTypeDef const *USBx)
+uint32_t USB_ReadInterrupts(const USB_OTG_GlobalTypeDef *USBx)
 {
   uint32_t tmpreg;
 
@@ -1442,7 +1438,7 @@ static HAL_StatusTypeDef USB_CoreReset(USB_OTG_GlobalTypeDef *USBx)
   {
     count++;
 
-    if (count > HAL_USB_TIMEOUT)
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
     {
       return HAL_TIMEOUT;
     }
@@ -1463,7 +1459,7 @@ static HAL_StatusTypeDef USB_CoreReset(USB_OTG_GlobalTypeDef *USBx)
   {
     count++;
 
-    if (count > HAL_USB_TIMEOUT)
+    if (count > HAL_USB_SYSTEMCLOCK_MS(HAL_USB_TIMEOUT))
     {
       return HAL_TIMEOUT;
     }
@@ -1600,6 +1596,7 @@ HAL_StatusTypeDef USB_InitFSLSPClkSel(const USB_OTG_GlobalTypeDef *USBx, uint8_t
 HAL_StatusTypeDef USB_ResetPort(const USB_OTG_GlobalTypeDef *USBx)
 {
   uint32_t USBx_BASE = (uint32_t)USBx;
+  uint32_t wait_start;
 
   __IO uint32_t hprt0 = 0U;
 
@@ -1609,9 +1606,21 @@ HAL_StatusTypeDef USB_ResetPort(const USB_OTG_GlobalTypeDef *USBx)
              USB_OTG_HPRT_PENCHNG | USB_OTG_HPRT_POCCHNG);
 
   USBx_HPRT0 = (USB_OTG_HPRT_PRST | hprt0);
-  HAL_Delay(100U);                                 /* See Note #1 */
+
+  /* See Note #1 */
+  wait_start = HAL_GetTick();
+  while ((HAL_GetTick() - wait_start) < 100U)
+  {
+    /* Busy-wait */
+  }
+
   USBx_HPRT0 = ((~USB_OTG_HPRT_PRST) & hprt0);
-  HAL_Delay(10U);
+
+  wait_start = HAL_GetTick();
+  while ((HAL_GetTick() - wait_start) < 10U)
+  {
+    /* Busy-wait */
+  }
 
   return HAL_OK;
 }
@@ -1654,7 +1663,7 @@ HAL_StatusTypeDef USB_DriveVbus(const USB_OTG_GlobalTypeDef *USBx, uint8_t state
   *            @arg HCD_DEVICE_SPEED_FULL: Full speed mode
   *            @arg HCD_DEVICE_SPEED_LOW: Low speed mode
   */
-uint32_t USB_GetHostSpeed(USB_OTG_GlobalTypeDef const *USBx)
+uint32_t USB_GetHostSpeed(const USB_OTG_GlobalTypeDef *USBx)
 {
   uint32_t USBx_BASE = (uint32_t)USBx;
   __IO uint32_t hprt0 = 0U;
@@ -1668,7 +1677,7 @@ uint32_t USB_GetHostSpeed(USB_OTG_GlobalTypeDef const *USBx)
   * @param  USBx  Selected device
   * @retval current frame number
   */
-uint32_t USB_GetCurrentFrame(USB_OTG_GlobalTypeDef const *USBx)
+uint32_t USB_GetCurrentFrame(const USB_OTG_GlobalTypeDef *USBx)
 {
   uint32_t USBx_BASE = (uint32_t)USBx;
 
@@ -1994,7 +2003,7 @@ HAL_StatusTypeDef USB_HC_StartXfer(USB_OTG_GlobalTypeDef *USBx, USB_OTG_HCTypeDe
 
         case HCSPLT_MIDDLE:
           /* Middle data payload for OUT Transaction */
-          USBx_HC((uint32_t)ch_num)->HCSPLT |= USB_OTG_HCSPLT_XACTPOS_Pos;
+          USBx_HC((uint32_t)ch_num)->HCSPLT &= ~USB_OTG_HCSPLT_XACTPOS_Msk;
           break;
 
         case HCSPLT_END:

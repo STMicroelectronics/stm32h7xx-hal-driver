@@ -106,6 +106,9 @@ typedef struct
 #ifndef HAL_HCD_CHANNEL_NAK_COUNT
 #define HAL_HCD_CHANNEL_NAK_COUNT           2U
 #endif /* HAL_HCD_CHANNEL_NAK_COUNT */
+#ifndef HAL_HCD_CHANNEL_NYET_COUNT
+#define HAL_HCD_CHANNEL_NYET_COUNT          2U
+#endif /* HAL_HCD_CHANNEL_NYET_COUNT */
 
 /** @defgroup HCD_Speed HCD Speed
   * @{
@@ -132,6 +135,8 @@ typedef struct
   */
 #define HCD_PHY_ULPI                 1U
 #define HCD_PHY_EMBEDDED             2U
+#define HCD_HS_PHY_EMBEDDED          3U
+#define HCD_PHY_UTMI                 3U
 /**
   * @}
   */
@@ -292,10 +297,10 @@ HAL_StatusTypeDef HAL_HCD_Stop(HCD_HandleTypeDef *hhcd);
 /** @addtogroup HCD_Exported_Functions_Group4 Peripheral State functions
   * @{
   */
-HCD_StateTypeDef        HAL_HCD_GetState(HCD_HandleTypeDef const *hhcd);
-HCD_URBStateTypeDef     HAL_HCD_HC_GetURBState(HCD_HandleTypeDef const *hhcd, uint8_t chnum);
-HCD_HCStateTypeDef      HAL_HCD_HC_GetState(HCD_HandleTypeDef const *hhcd, uint8_t chnum);
-uint32_t                HAL_HCD_HC_GetXferCount(HCD_HandleTypeDef const *hhcd, uint8_t chnum);
+HCD_StateTypeDef        HAL_HCD_GetState(const HCD_HandleTypeDef *hhcd);
+HCD_URBStateTypeDef     HAL_HCD_HC_GetURBState(const HCD_HandleTypeDef *hhcd, uint8_t chnum);
+HCD_HCStateTypeDef      HAL_HCD_HC_GetState(const HCD_HandleTypeDef *hhcd, uint8_t chnum);
+uint32_t                HAL_HCD_HC_GetXferCount(const HCD_HandleTypeDef *hhcd, uint8_t chnum);
 uint32_t                HAL_HCD_GetCurrentFrame(HCD_HandleTypeDef *hhcd);
 uint32_t                HAL_HCD_GetCurrentSpeed(HCD_HandleTypeDef *hhcd);
 

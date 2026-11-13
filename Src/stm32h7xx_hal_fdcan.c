@@ -2956,6 +2956,7 @@ HAL_StatusTypeDef HAL_FDCAN_GetRxMessage(FDCAN_HandleTypeDef *hfdcan, uint32_t R
   uint8_t  *pData;
   uint32_t ByteCounter;
   uint32_t GetIndex = 0;
+  uint32_t fifo_size;
   HAL_FDCAN_StateTypeDef state = hfdcan->State;
 
   if (state == HAL_FDCAN_STATE_BUSY)
@@ -2989,9 +2990,19 @@ HAL_StatusTypeDef HAL_FDCAN_GetRxMessage(FDCAN_HandleTypeDef *hfdcan, uint32_t R
         {
           if (((hfdcan->Instance->RXF0C & FDCAN_RXF0C_F0OM) >> FDCAN_RXF0C_F0OM_Pos) == FDCAN_RX_FIFO_OVERWRITE)
           {
-            /* When overwrite status is on discard first message in FIFO */
-            /* GetIndex is incremented by one and wraps to 0 in case it overflows the FIFO size */
-            GetIndex = (GetIndex + 1U) & ((hfdcan->Instance->RXF0C & FDCAN_RXF0C_F0S) >> FDCAN_RXF0C_F0S_Pos);
+            /* Read configured FIFO size */
+            fifo_size = ((hfdcan->Instance->RXF0C & FDCAN_RXF0C_F0S) >> FDCAN_RXF0C_F0S_Pos);
+            if (fifo_size > 0U)
+            {
+              /* When overwrite status is on, discard first message in FIFO */
+              /* GetIndex is incremented by one and wraps to 0 if it reaches the FIFO size */
+              GetIndex = (GetIndex + 1U) % fifo_size;
+            }
+            else
+            {
+              /* Invalid FIFO size configuration */
+              return HAL_ERROR;
+            }
           }
         }
 
@@ -3028,9 +3039,19 @@ HAL_StatusTypeDef HAL_FDCAN_GetRxMessage(FDCAN_HandleTypeDef *hfdcan, uint32_t R
         {
           if (((hfdcan->Instance->RXF1C & FDCAN_RXF1C_F1OM) >> FDCAN_RXF1C_F1OM_Pos) == FDCAN_RX_FIFO_OVERWRITE)
           {
-            /* When overwrite status is on discard first message in FIFO */
-            /* GetIndex is incremented by one and wraps to 0 in case it overflows the FIFO size */
-            GetIndex = (GetIndex + 1U) & ((hfdcan->Instance->RXF1C & FDCAN_RXF1C_F1S) >> FDCAN_RXF1C_F1S_Pos);
+            /* Read configured FIFO size */
+            fifo_size = ((hfdcan->Instance->RXF1C & FDCAN_RXF1C_F1S) >> FDCAN_RXF1C_F1S_Pos);
+            if (fifo_size > 0U)
+            {
+              /* When overwrite status is on, discard first message in FIFO */
+              /* GetIndex is incremented by one and wraps to 0 if it reaches the FIFO size */
+              GetIndex = (GetIndex + 1U) % fifo_size;
+            }
+            else
+            {
+              /* Invalid FIFO size configuration */
+              return HAL_ERROR;
+            }
           }
         }
 

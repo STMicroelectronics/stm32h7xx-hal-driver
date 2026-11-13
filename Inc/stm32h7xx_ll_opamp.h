@@ -793,7 +793,7 @@ __STATIC_INLINE uint32_t LL_OPAMP_IsEnabled(const OPAMP_TypeDef *OPAMPx)
   */
 
 ErrorStatus LL_OPAMP_DeInit(OPAMP_TypeDef *OPAMPx);
-ErrorStatus LL_OPAMP_Init(OPAMP_TypeDef *OPAMPx, LL_OPAMP_InitTypeDef *OPAMP_InitStruct);
+ErrorStatus LL_OPAMP_Init(OPAMP_TypeDef *OPAMPx, const LL_OPAMP_InitTypeDef *OPAMP_InitStruct);
 void        LL_OPAMP_StructInit(LL_OPAMP_InitTypeDef *OPAMP_InitStruct);
 
 /**

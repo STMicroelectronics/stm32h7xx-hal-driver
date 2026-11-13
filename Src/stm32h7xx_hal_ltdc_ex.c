@@ -67,7 +67,7 @@
   *         polarities inversion as described in the current LTDC specification
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_LTDCEx_StructInitFromVideoConfig(LTDC_HandleTypeDef *hltdc, DSI_VidCfgTypeDef *VidCfg)
+HAL_StatusTypeDef HAL_LTDCEx_StructInitFromVideoConfig(LTDC_HandleTypeDef *hltdc, const DSI_VidCfgTypeDef *VidCfg)
 {
   /* Retrieve signal polarities from DSI */
 
@@ -108,7 +108,8 @@ HAL_StatusTypeDef HAL_LTDCEx_StructInitFromVideoConfig(LTDC_HandleTypeDef *hltdc
   *         polarities inversion as described in the current LTDC specification
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_LTDCEx_StructInitFromAdaptedCommandConfig(LTDC_HandleTypeDef *hltdc, DSI_CmdCfgTypeDef *CmdCfg)
+HAL_StatusTypeDef HAL_LTDCEx_StructInitFromAdaptedCommandConfig(LTDC_HandleTypeDef *hltdc,
+                                                                const DSI_CmdCfgTypeDef *CmdCfg)
 {
   /* Retrieve signal polarities from DSI */
 

@@ -84,19 +84,19 @@
 
 /* Defines used for FLASH latency according to HCLK Frequency */
 #if (STM32H7_DEV_ID == 0x480UL)
-#define UTILS_SCALE0_LATENCY0_FREQ   44000000U       /*!< HCLK frequency to set FLASH latency 0 in power scale 0  */
-#define UTILS_SCALE0_LATENCY1_FREQ   88000000U       /*!< HCLK frequency to set FLASH latency 1 in power scale 0  */
-#define UTILS_SCALE0_LATENCY2_FREQ  132000000U       /*!< HCLK frequency to set FLASH latency 2 in power scale 0  */
-#define UTILS_SCALE0_LATENCY3_FREQ  176000000U       /*!< HCLK frequency to set FLASH latency 3 in power scale 0  */
-#define UTILS_SCALE0_LATENCY4_FREQ  220000000U       /*!< HCLK frequency to set FLASH latency 4 in power scale 0  */
-#define UTILS_SCALE0_LATENCY5_FREQ  264000000U       /*!< HCLK frequency to set FLASH latency 5 in power scale 0  */
+#define UTILS_SCALE0_LATENCY0_FREQ   42000000U       /*!< HCLK frequency to set FLASH latency 0 in power scale 0  */
+#define UTILS_SCALE0_LATENCY1_FREQ   84000000U       /*!< HCLK frequency to set FLASH latency 1 in power scale 0  */
+#define UTILS_SCALE0_LATENCY2_FREQ  126000000U       /*!< HCLK frequency to set FLASH latency 2 in power scale 0  */
+#define UTILS_SCALE0_LATENCY3_FREQ  168000000U       /*!< HCLK frequency to set FLASH latency 3 in power scale 0  */
+#define UTILS_SCALE0_LATENCY4_FREQ  210000000U       /*!< HCLK frequency to set FLASH latency 4 in power scale 0  */
+#define UTILS_SCALE0_LATENCY5_FREQ  252000000U       /*!< HCLK frequency to set FLASH latency 5 in power scale 0  */
 #define UTILS_SCALE0_LATENCY6_FREQ  280000000U       /*!< HCLK frequency to set FLASH latency 6 in power scale 0  */
 
-#define UTILS_SCALE1_LATENCY0_FREQ   42000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 1  */
-#define UTILS_SCALE1_LATENCY1_FREQ   84000000U      /*!< HCLK frequency to set FLASH latency 1 in power scale 1  */
-#define UTILS_SCALE1_LATENCY2_FREQ  126000000U      /*!< HCLK frequency to set FLASH latency 2 in power scale 1  */
-#define UTILS_SCALE1_LATENCY3_FREQ  168000000U      /*!< HCLK frequency to set FLASH latency 3 in power scale 1  */
-#define UTILS_SCALE1_LATENCY4_FREQ  210000000U      /*!< HCLK frequency to set FLASH latency 4 in power scale 1  */
+#define UTILS_SCALE1_LATENCY0_FREQ   38000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 1  */
+#define UTILS_SCALE1_LATENCY1_FREQ   76000000U      /*!< HCLK frequency to set FLASH latency 1 in power scale 1  */
+#define UTILS_SCALE1_LATENCY2_FREQ  114000000U      /*!< HCLK frequency to set FLASH latency 2 in power scale 1  */
+#define UTILS_SCALE1_LATENCY3_FREQ  152000000U      /*!< HCLK frequency to set FLASH latency 3 in power scale 1  */
+#define UTILS_SCALE1_LATENCY4_FREQ  190000000U      /*!< HCLK frequency to set FLASH latency 4 in power scale 1  */
 #define UTILS_SCALE1_LATENCY5_FREQ  225000000U      /*!< HCLK frequency to set FLASH latency 5 in power scale 1  */
 
 #define UTILS_SCALE2_LATENCY0_FREQ   34000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 2  */
@@ -112,14 +112,21 @@
 
 #elif (STM32H7_DEV_ID == 0x450UL)
 
+#define UTILS_SCALE0_LATENCY0_FREQ   70000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 0  */
+#define UTILS_SCALE0_LATENCY1_FREQ  140000000U      /*!< HCLK frequency to set FLASH latency 1 in power scale 0  */
+#define UTILS_SCALE0_LATENCY2_FREQ  210000000U      /*!< HCLK frequency to set FLASH latency 2 in power scale 0  */
+#define UTILS_SCALE0_LATENCY3_FREQ  225000000U      /*!< HCLK frequency to set FLASH latency 3 in power scale 0  */
+#define UTILS_SCALE0_LATENCY4_FREQ  240000000U      /*!< HCLK frequency to set FLASH latency 4 in power scale 0  */
+
 #define UTILS_SCALE1_LATENCY0_FREQ   70000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 1  */
 #define UTILS_SCALE1_LATENCY1_FREQ  140000000U      /*!< HCLK frequency to set FLASH latency 1 in power scale 1  */
-#define UTILS_SCALE1_LATENCY2_FREQ  240000000U      /*!< HCLK frequency to set FLASH latency 2 in power scale 1  */
+#define UTILS_SCALE1_LATENCY2_FREQ  210000000U      /*!< HCLK frequency to set FLASH latency 2 in power scale 1  */
+#define UTILS_SCALE1_LATENCY3_FREQ  225000000U      /*!< HCLK frequency to set FLASH latency 3 in power scale 1  */
 
 #define UTILS_SCALE2_LATENCY0_FREQ   55000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 2  */
 #define UTILS_SCALE2_LATENCY1_FREQ  110000000U      /*!< HCLK frequency to set FLASH latency 1 in power scale 2  */
 #define UTILS_SCALE2_LATENCY2_FREQ  165000000U      /*!< HCLK frequency to set FLASH latency 2 in power scale 2  */
-#define UTILS_SCALE2_LATENCY3_FREQ  220000000U      /*!< HCLK frequency to set FLASH latency 3 in power scale 2  */
+#define UTILS_SCALE2_LATENCY3_FREQ  225000000U      /*!< HCLK frequency to set FLASH latency 3 in power scale 2  */
 
 #define UTILS_SCALE3_LATENCY0_FREQ   45000000U      /*!< HCLK frequency to set FLASH latency 0 in power scale 3  */
 #define UTILS_SCALE3_LATENCY1_FREQ   90000000U      /*!< HCLK frequency to set FLASH latency 1 in power scale 3  */
@@ -247,7 +254,8 @@
 /** @defgroup UTILS_LL_Private_Functions UTILS Private functions
   * @{
   */
-static uint32_t    UTILS_GetPLLOutputFrequency(uint32_t PLL_InputFrequency, LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct);
+static uint32_t    UTILS_GetPLLOutputFrequency(uint32_t PLL_InputFrequency,
+                                               const LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct);
 static ErrorStatus UTILS_EnablePLLAndSwitchSystem(uint32_t SYSCLK_Frequency, LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct);
 static ErrorStatus UTILS_IsPLLsReady(void);
 static uint32_t    UTILS_CalcPLLClockFreq(uint32_t PLLInputFreq, uint32_t M, uint32_t N, uint32_t FRACN, uint32_t PQR);
@@ -346,22 +354,22 @@ void LL_mDelay(uint32_t Delay)
   @internal
              Depending on the device voltage range, the maximum frequency should be
              adapted accordingly:
-             (++) +----------------------------------------------------------------------------+
-             (++) |  Wait states   |                           HCLK clock frequency (MHz)      |
-             (++) |                |-----------------------------------------------------------|
-             (++) |  (Latency)     |   voltage range 1 |   voltage range 2 |   voltage range 3 |
-             (++) |                |    1.15V - 1.26V  |    1.05V - 1.15V  |    0.95V - 1.05V  |
-             (++) |----------------|-------------------|-------------------|-------------------|
-             (++) |0WS(1CPU cycle) |   0 < HCLK <= 70  |   0 < HCLK <= 55  |   0 < HCLK <= 45  |
-             (++) |----------------|-------------------|-------------------|-------------------|
-             (++) |1WS(2CPU cycle) |  70 < HCLK <= 140 |  55 < HCLK <= 110 |  45 < HCLK <= 90  |
-             (++) |----------------|-------------------|-------------------|-------------------|
-             (++) |2WS(3CPU cycle) | 140 < HCLK <= 240 | 110 < HCLK <= 165 |  90 < HCLK <= 135 |
-             (++) |----------------|-------------------|-------------------|-------------------|
-             (++) |3WS(4CPU cycle) |        --         | 165 < HCLK <= 220 | 135 < HCLK <= 180 |
-             (++) |----------------|-------------------|-------------------|-------------------|
-             (++) |4WS(5CPU cycle) |        --         |        --         | 180 < HCLK <= 225 |
-             (++) +----------------------------------------------------------------------------+
+             (++) +------------------------------------------------------------------------------------------------+
+             (++) |  Wait states   |                          HCLK clock frequency (MHz)                           |
+             (++) |                |-------------------------------------------------------------------------------|
+             (++) |  (Latency)     |   voltage range 0 |   voltage range 1 |   voltage range 2 |   voltage range 3 |
+             (++) |                |    1.26V - 1.40V  |    1.15V - 1.26V  |    1.05V - 1.15V  |    0.95V - 1.05V  |
+             (++) |----------------|-------------------|-------------------|-------------------|-------------------|
+             (++) |0WS(1CPU cycle) |   0 < HCLK <= 70  |   0 < HCLK <= 70  |   0 < HCLK <= 55  |   0 < HCLK <= 45  |
+             (++) |----------------|-------------------|-------------------|-------------------|-------------------|
+             (++) |1WS(2CPU cycle) |  70 < HCLK <= 140 |  70 < HCLK <= 140 |  55 < HCLK <= 110 |  45 < HCLK <= 90  |
+             (++) |----------------|-------------------|-------------------|-------------------|-------------------|
+             (++) |2WS(3CPU cycle) | 140 < HCLK <= 210 | 140 < HCLK <= 210 | 110 < HCLK <= 165 |  90 < HCLK <= 135 |
+             (++) |----------------|-------------------|-------------------|-------------------|-------------------|
+             (++) |3WS(4CPU cycle) | 210 < HCLK <= 225 | 210 < HCLK <= 225 | 165 < HCLK <= 225 | 135 < HCLK <= 180 |
+             (++) |----------------|-------------------|-------------------|-------------------|-------------------|
+             (++) |4WS(5CPU cycle) | 225 < HCLK <= 240 |        --         |        --         | 180 < HCLK <= 225 |
+             (++) +------------------------------------------------------------------------------------------------+
 
   (*) : For stm32h74xxx and stm32h75xxx family lines and requires the board to be connected on LDO regulator not SMPS, 400MHZ otherwise.
   @endinternal
@@ -389,21 +397,21 @@ void LL_mDelay(uint32_t Delay)
              (++) |  Wait states   |                          HCLK clock frequency (MHz)                           |
              (++) |                |-------------------------------------------------------------------------------|
              (++) |  (Latency)     |   voltage range 0 |   voltage range 1 |   voltage range 2 |   voltage range 3 |
-             (++) |                |    1.26V - 1.35V  |    1.15V - 1.26V  |    1.05V - 1.15V  |    0.95V - 1.05V  |
+             (++) |                |    1.25V - 1.35V  |    1.15V - 1.25V  |    1.05V - 1.15V  |    0.95V - 1.05V  |
              (++) |----------------|-------------------|-------------------|-------------------|-------------------|
-             (++) |0WS(1CPU cycle) |   0 < HCLK <= 44  |   0 < HCLK <= 42  |   0 < HCLK <= 34  |   0 < HCLK <= 22  |
+             (++) |0WS(1CPU cycle) |   0 < HCLK <= 42  |   0 < HCLK <= 38  |   0 < HCLK <= 34  |   0 < HCLK <= 22  |
              (++) |----------------|-------------------|-------------------|-------------------|-------------------|
-             (++) |1WS(2CPU cycle) |  44 < HCLK <= 88  |  42 < HCLK <= 84  |  34 < HCLK <= 68  |  22 < HCLK <= 44  |
+             (++) |1WS(2CPU cycle) |  42 < HCLK <= 84  |  38 < HCLK <= 76  |  34 < HCLK <= 68  |  22 < HCLK <= 44  |
              (++) |----------------|-------------------|-------------------|-------------------|-------------------|
-             (++) |2WS(3CPU cycle) |  88 < HCLK <= 132 |  84 < HCLK <= 126 |  68 < HCLK <= 102 |  44 < HCLK <= 66  |
+             (++) |2WS(3CPU cycle) |  84 < HCLK <= 126 |  76 < HCLK <= 114 |  68 < HCLK <= 102 |  44 < HCLK <= 66  |
              (++) |----------------|-------------------|-------------------|-------------------|-------------------|
-             (++) |3WS(4CPU cycle) | 132 < HCLK <= 176 | 126 < HCLK <= 168 | 102 < HCLK <= 136 |  66 < HCLK <= 88  |
+             (++) |3WS(4CPU cycle) | 126 < HCLK <= 168 | 114 < HCLK <= 152 | 102 < HCLK <= 136 |  66 < HCLK <= 88  |
              (++) |----------------|-------------------|-------------------|-------------------|-------------------|
-             (++) |4WS(5CPU cycle) | 176 < HCLK <= 220 | 168 < HCLK <= 210 | 136 < HCLK <= 160 |        --         |
+             (++) |4WS(5CPU cycle) | 168 < HCLK <= 210 | 152 < HCLK <= 190 | 136 < HCLK <= 160 |        --         |
              (++) +------------------------------------------------------------------------------------------------+
-             (++) |5WS(6CPU cycle) | 220 < HCLK <= 264 | 210 < HCLK <= 225 |        --         |        --         |
+             (++) |5WS(6CPU cycle) | 210 < HCLK <= 252 | 190 < HCLK <= 225 |        --         |        --         |
              (++) +------------------------------------------------------------------------------------------------+
-             (++) |6WS(7CPU cycle) | 264 < HCLK <= 280 |        --         |        --         |        --         |
+             (++) |6WS(7CPU cycle) | 252 < HCLK <= 280 |        --         |        --         |        --         |
              (++) +------------------------------------------------------------------------------------------------+
              (++) |7WS(8CPU cycle) |        --         |        --         |        --         |        --         |
              (++) +------------------------------------------------------------------------------------------------+
@@ -695,8 +703,6 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
   uint32_t getlatency;
   uint32_t latency = LL_FLASH_LATENCY_0;  /* default value 0WS */
 
-
-
   /* Frequency cannot be equal to 0 */
   if (HCLK_Frequency == 0U)
   {
@@ -704,81 +710,202 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
   }
   else
   {
-#if (STM32H7_DEV_ID == 0x480UL) || (STM32H7_DEV_ID == 0x483UL)
+
+#if (STM32H7_DEV_ID == 0x480UL)
     if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE0)
     {
-#if (STM32H7_DEV_ID == 0x480UL)
       if((HCLK_Frequency > UTILS_SCALE0_LATENCY5_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY6_FREQ))
       {
-        /* 264 < HCLK <= 280 => 6WS (7 CPU cycles) */
+        /* 252 < HCLK <= 280 => 6WS (7 CPU cycles) */
         latency = LL_FLASH_LATENCY_6;
       }
       else if((HCLK_Frequency > UTILS_SCALE0_LATENCY4_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY5_FREQ))
       {
-        /* 220 < HCLK <= 264 => 5WS (6 CPU cycles) */
+        /* 210 < HCLK <= 252 => 5WS (6 CPU cycles) */
         latency = LL_FLASH_LATENCY_5;
       }
       else if((HCLK_Frequency > UTILS_SCALE0_LATENCY3_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY4_FREQ))
       {
-        /* 176 < HCLK <= 220 => 4WS (5 CPU cycles) */
+        /* 168 < HCLK <= 210 => 4WS (5 CPU cycles)*/
         latency = LL_FLASH_LATENCY_4;
       }
       else if((HCLK_Frequency > UTILS_SCALE0_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY3_FREQ))
-#elif (STM32H7_DEV_ID == 0x483UL)
-      if((HCLK_Frequency > UTILS_SCALE0_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY3_FREQ))
-#endif /* STM32H7_DEV_ID == 0x480UL */
       {
-        /* 132 < HCLK <= 176 => 3WS (4 CPU cycles) */
+        /* 126 < HCLK <= 168 => 3WS (4 CPU cycles)*/
         latency = LL_FLASH_LATENCY_3;
       }
       else if((HCLK_Frequency > UTILS_SCALE0_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY2_FREQ))
       {
-        /* 88 < HCLK <= 132 => 2WS (3 CPU cycles) */
+        /* 84 < HCLK <= 126 => 2WS (3 CPU cycles)*/
         latency = LL_FLASH_LATENCY_2;
       }
       else if((HCLK_Frequency > UTILS_SCALE0_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY1_FREQ))
       {
-        /* 44 < HCLK <= 88 => 1WS (2 CPU cycles) */
+        /* 42 < HCLK <= 84 => 1WS (2 CPU cycles)*/
         latency = LL_FLASH_LATENCY_1;
       }
       else if(HCLK_Frequency <= UTILS_SCALE0_LATENCY0_FREQ)
       {
-        /* HCLK <= 44 => 0WS (1 CPU cycles) : Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+        /* HCLK <= 42 => 0WS (1 CPU cycles)*/
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
       }
       else
       {
         status = ERROR;
       }
     }
-#if (STM32H7_DEV_ID == 0x480UL)
     else if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE1)
     {
       if((HCLK_Frequency > UTILS_SCALE1_LATENCY4_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY5_FREQ))
       {
-        /* 210 < HCLK <= 225 => 5WS (6 CPU cycles) */
+        /* 190 < HCLK <= 225 => 5WS (6 CPU cycles) */
         latency = LL_FLASH_LATENCY_5;
       }
       else if((HCLK_Frequency > UTILS_SCALE1_LATENCY3_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY4_FREQ))
       {
-        /* 168 < HCLK <= 210 => 4WS (5 CPU cycles) */
+        /* 152 < HCLK <= 190 => 4WS (5 CPU cycles) */
         latency = LL_FLASH_LATENCY_4;
       }
       else if((HCLK_Frequency > UTILS_SCALE1_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY3_FREQ))
       {
-        /* 126 < HCLK <= 168 => 3WS (4 CPU cycles) */
+        /* 114 < HCLK <= 152 => 3WS (4 CPU cycles) */
         latency = LL_FLASH_LATENCY_3;
       }
       else if((HCLK_Frequency > UTILS_SCALE1_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY2_FREQ))
-#else
-    if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE1)
+      {
+        /* 76 < HCLK <= 114 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE1_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY1_FREQ))
+      {
+        /* 38 < HCLK <= 76 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE1_LATENCY0_FREQ)
+      {
+        /* HCLK <= 38 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+    else if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE2)
     {
-      if((HCLK_Frequency > UTILS_SCALE1_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY2_FREQ))
-#endif /* STM32H7_DEV_ID == 0x480UL */
-#else
-    if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE1)
+      if((HCLK_Frequency > UTILS_SCALE2_LATENCY3_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY4_FREQ))
+      {
+        /* 136 < HCLK <= 160 => 4WS (5 CPU cycles) */
+        latency = LL_FLASH_LATENCY_4;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE2_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY3_FREQ))
+      {
+        /* 102 < HCLK <= 136 => 3WS (4 CPU cycles) */
+        latency = LL_FLASH_LATENCY_3;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE2_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY2_FREQ))
+      {
+        /* 68 < HCLK <= 102 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE2_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY1_FREQ))
+      {
+        /* 34 < HCLK <= 68 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE2_LATENCY0_FREQ)
+      {
+        /* HCLK <= 34 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+    else /* Scale 3 */
     {
-      if((HCLK_Frequency > UTILS_SCALE1_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY2_FREQ))
-#endif /* STM32H7_DEV_ID == 0x480UL || STM32H7_DEV_ID == 0x483UL */
+      if((HCLK_Frequency > UTILS_SCALE3_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY3_FREQ))
+      {
+        /* 66 < HCLK <= 88 => 3WS (4 CPU cycles) */
+        latency = LL_FLASH_LATENCY_3;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE3_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY2_FREQ))
+      {
+        /* 44 < HCLK <= 66 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE3_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY1_FREQ))
+      {
+        /* 22 < HCLK <= 44 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE3_LATENCY0_FREQ)
+      {
+        /* HCLK <= 22 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+#endif /*STM32H7_DEV_ID == 0x480UL*/
+
+#if (STM32H7_DEV_ID == 0x450UL)
+    if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE0)
+    {
+      if((HCLK_Frequency > UTILS_SCALE0_LATENCY3_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY4_FREQ))
+#if defined(SYSCFG_PWRCR_ODEN)
+      {
+        if (READ_BIT(SYSCFG->PWRCR, SYSCFG_PWRCR_ODEN) != 0U)
+        {
+          /* 225 < HCLK <= 240 => 4WS (5 CPU cycles) */
+          latency = LL_FLASH_LATENCY_4;
+        }
+        else
+        {
+          status = ERROR;
+        }
+      }
+#else
+      {
+        status = ERROR;
+      }
+#endif /*SYSCFG_PWRCR_ODEN*/
+      else if((HCLK_Frequency > UTILS_SCALE0_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY3_FREQ))
+      {
+        /* 210 < HCLK <= 225 => 3WS (4 CPU cycles) */
+        latency = LL_FLASH_LATENCY_3;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE0_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY2_FREQ))
+      {
+        /* 140 < HCLK <= 210 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE0_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY1_FREQ))
+      {
+        /* 70 < HCLK <= 140 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE0_LATENCY0_FREQ)
+      {
+        /* HCLK <= 70 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+    else if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE1)
+    {
+      if((HCLK_Frequency > UTILS_SCALE1_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY3_FREQ))
+      {
+        /* 210 < HCLK <= 225 => 3WS (4 CPU cycles) */
+        latency = LL_FLASH_LATENCY_3;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE1_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY2_FREQ))
       {
         /* 140 < HCLK <= 210 => 2WS (3 CPU cycles) */
         latency = LL_FLASH_LATENCY_2;
@@ -790,7 +917,8 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
       }
       else if(HCLK_Frequency <= UTILS_SCALE1_LATENCY0_FREQ)
       {
-        /* HCLK <= 70 => 0WS (1 CPU cycles) : Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+        /* HCLK <= 70 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
       }
       else
       {
@@ -799,25 +927,12 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
     }
     else if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE2)
     {
-#if (STM32H7_DEV_ID == 0x480UL) || (STM32H7_DEV_ID == 0x450UL)
-#if (STM32H7_DEV_ID == 0x480UL)
-      if((HCLK_Frequency > UTILS_SCALE2_LATENCY3_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY4_FREQ))
-      {
-        /* 136 < HCLK <= 160 => 4WS (5 CPU cycles) */
-        latency = LL_FLASH_LATENCY_4;
-      }
-      else if((HCLK_Frequency > UTILS_SCALE2_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY3_FREQ))
-#else
       if((HCLK_Frequency > UTILS_SCALE2_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY3_FREQ))
-#endif /* STM32H7_DEV_ID == 0x480UL */
       {
-        /* 165 < HCLK <= 220 => 3WS (4 CPU cycles) */
+        /* 165 < HCLK <= 225 => 3WS (4 CPU cycles) */
         latency = LL_FLASH_LATENCY_3;
       }
       else if((HCLK_Frequency > UTILS_SCALE2_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY2_FREQ))
-#else
-      if((HCLK_Frequency > UTILS_SCALE2_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY2_FREQ))
-#endif /* STM32H7_DEV_ID == 0x480UL || STM32H7_DEV_ID == 0x450UL */
       {
         /* 110 < HCLK <= 165 => 2WS (3 CPU cycles) */
         latency = LL_FLASH_LATENCY_2;
@@ -829,7 +944,8 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
       }
       else if(HCLK_Frequency <= UTILS_SCALE2_LATENCY0_FREQ)
       {
-        /* HCLK <= 55 => 0WS (1 CPU cycles) : Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+        /* HCLK <= 55 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
       }
       else
       {
@@ -838,25 +954,17 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
     }
     else /* Scale 3 */
     {
-#if (STM32H7_DEV_ID == 0x450UL) || (STM32H7_DEV_ID == 0x480UL)
-#if (STM32H7_DEV_ID == 0x450UL)
       if((HCLK_Frequency > UTILS_SCALE3_LATENCY3_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY4_FREQ))
       {
         /* 180 < HCLK <= 225 => 4WS (5 CPU cycles) */
         latency = LL_FLASH_LATENCY_4;
       }
       else if((HCLK_Frequency > UTILS_SCALE3_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY3_FREQ))
-#else
-      if((HCLK_Frequency > UTILS_SCALE3_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY3_FREQ))
-#endif /*STM32H7_DEV_ID == 0x450UL*/
       {
         /* 135 < HCLK <= 180 => 3WS (4 CPU cycles) */
         latency = LL_FLASH_LATENCY_3;
       }
       else if((HCLK_Frequency > UTILS_SCALE3_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY2_FREQ))
-#else
-      if((HCLK_Frequency > UTILS_SCALE3_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY2_FREQ))
-#endif /* STM32H7_DEV_ID == 0x450UL || STM32H7_DEV_ID == 0x480UL */
       {
         /* 90 < HCLK <= 135 => 2WS (3 CPU cycles) */
         latency = LL_FLASH_LATENCY_2;
@@ -868,13 +976,111 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
       }
       else if(HCLK_Frequency <= UTILS_SCALE3_LATENCY0_FREQ)
       {
-        /* HCLK <= 45 => 0WS (1 CPU cycles) : Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+        /* HCLK <= 45 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
       }
       else
       {
         status = ERROR;
       }
     }
+#endif /*STM32H7_DEV_ID == 0x450UL*/
+
+#if (STM32H7_DEV_ID == 0x483UL)
+    if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE0)
+    {
+      if((HCLK_Frequency > UTILS_SCALE0_LATENCY2_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY3_FREQ))
+      {
+        /* 210 < HCLK <= 275 => 3WS (4 CPU cycles) */
+        latency = LL_FLASH_LATENCY_3;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE0_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY2_FREQ))
+      {
+        /* 140 < HCLK <= 210 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE0_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE0_LATENCY1_FREQ))
+      {
+        /* 70 < HCLK <= 140 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE0_LATENCY0_FREQ)
+      {
+        /* HCLK <= 70 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+    else if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE1)
+    {
+      if((HCLK_Frequency > UTILS_SCALE1_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY2_FREQ))
+      {
+        /* 133 < HCLK <= 200 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE1_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE1_LATENCY1_FREQ))
+      {
+        /* 67 < HCLK <= 133 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE1_LATENCY0_FREQ)
+      {
+        /* HCLK <= 67 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+    else if(LL_PWR_GetRegulVoltageScaling() == LL_PWR_REGU_VOLTAGE_SCALE2)
+    {
+      if((HCLK_Frequency > UTILS_SCALE2_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY2_FREQ))
+      {
+        /* 100 < HCLK <= 150 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE2_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE2_LATENCY1_FREQ))
+      {
+        /* 50 < HCLK <= 100 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE2_LATENCY0_FREQ)
+      {
+        /* HCLK <= 50 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+    else /* Scale 3 */
+    {
+      if((HCLK_Frequency > UTILS_SCALE3_LATENCY1_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY2_FREQ))
+      {
+        /* 70 < HCLK <= 85 => 2WS (3 CPU cycles) */
+        latency = LL_FLASH_LATENCY_2;
+      }
+      else if((HCLK_Frequency > UTILS_SCALE3_LATENCY0_FREQ) && (HCLK_Frequency <= UTILS_SCALE3_LATENCY1_FREQ))
+      {
+        /* 35 < HCLK <= 70 => 1WS (2 CPU cycles) */
+        latency = LL_FLASH_LATENCY_1;
+      }
+      else if(HCLK_Frequency <= UTILS_SCALE3_LATENCY0_FREQ)
+      {
+        /* HCLK <= 35 => 0WS (1 CPU cycles) */
+        /* Do nothing keep latency to default  LL_FLASH_LATENCY_0 */
+      }
+      else
+      {
+        status = ERROR;
+      }
+    }
+#endif /*STM32H7_DEV_ID == 0x483UL*/
 
     if(status == SUCCESS)
     {
@@ -900,7 +1106,6 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
   return status;
 }
 
-
 /**
   * @}
   */
@@ -917,7 +1122,8 @@ ErrorStatus LL_SetFlashLatency(uint32_t HCLK_Frequency)
   *                             the configuration information for the PLL.
   * @retval PLL output frequency (in Hz)
   */
-static uint32_t UTILS_GetPLLOutputFrequency(uint32_t PLL_InputFrequency, LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct)
+static uint32_t UTILS_GetPLLOutputFrequency(uint32_t PLL_InputFrequency,
+                                            const LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct)
 {
   uint32_t pllfreq;
 
@@ -1091,4 +1297,3 @@ static ErrorStatus UTILS_EnablePLLAndSwitchSystem(uint32_t SYSCLK_Frequency, LL_
 /**
   * @}
   */
-

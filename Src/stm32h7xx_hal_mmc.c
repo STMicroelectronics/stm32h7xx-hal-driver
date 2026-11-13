@@ -2468,7 +2468,7 @@ HAL_StatusTypeDef HAL_MMC_GetCardExtCSD(MMC_HandleTypeDef *hmmc, uint32_t *pExtC
 HAL_StatusTypeDef HAL_MMC_ConfigWideBusOperation(MMC_HandleTypeDef *hmmc, uint32_t WideMode)
 {
   uint32_t count;
-  SDMMC_InitTypeDef Init;
+  SDMMC_InitTypeDef Init = {0U};
   uint32_t errorstate;
   uint32_t response = 0U;
 
@@ -3646,7 +3646,7 @@ static uint32_t MMC_InitCard(MMC_HandleTypeDef *hmmc)
   HAL_MMC_CardCSDTypeDef CSD;
   uint32_t errorstate;
   uint16_t mmc_rca = 2U;
-  MMC_InitTypeDef Init;
+  MMC_InitTypeDef Init = {0U};
 
   /* Check the power State */
   if (SDMMC_GetPowerState(hmmc->Instance) == 0U)
